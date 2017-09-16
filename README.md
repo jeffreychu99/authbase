@@ -15,7 +15,7 @@
  5. jQuery Portal
  
 
-**依赖flask及其相关插件**
+**后端依赖插件**
 
  1. Flask
  2. Flask-Migrate
@@ -30,8 +30,7 @@
 **使用方法**
 
 1. 导入根目录下db.sql数据库脚本到mysql数据库
-2. pip install -r requirements.txt
-本项目下的flask是下载好的依赖，在python环境下可以直接运行。
+2. pip install -r requirements.txt。本项目下的flask是下载好的依赖，在python环境下可以直接运行。
 3. python manager.py runserver
  
 **效果图**
