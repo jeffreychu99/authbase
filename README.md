@@ -33,6 +33,10 @@
 2. pip install -r requirements.txt。本项目下的flask是下载好的依赖，在python环境下可以直接运行。
 3. python manager.py runserver
  
+**讨论群**
+
+欢迎加入python技术爱好者，群号码：297690915
+
 **效果图**
 
 ![机构管理](http://images2017.cnblogs.com/blog/987815/201709/987815-20170916130952719-966287735.png)
