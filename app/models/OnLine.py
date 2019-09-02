@@ -17,9 +17,9 @@ class OnLine(db.Model):
 
     def to_json(self):
         return {
-            'id': self.ID,
-            'createdatetime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
-            'loginname': self.LOGINNAME,
-            'ip': self.IP,
+            'infoId': self.ID,
+            'loginTime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
+            'userName': self.LOGINNAME,
+            'ipaddr': self.IP,
             'type': self.TYPE
         }   

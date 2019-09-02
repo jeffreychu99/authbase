@@ -17,6 +17,9 @@ class Organization(db.Model, UserMixin):
     CODE = db.Column(db.String(200))
     ICONCLS = db.Column(db.String(100))
     SEQ = db.Column(db.Integer)
+    LEADER = db.Column(db.String(20))
+    PHONE = db.Column(db.String(11))
+    EMAIL = db.Column(db.String(50))
 
     resources = db.relationship('Resource',
                                 secondary=organization_resource_table,
@@ -26,17 +29,33 @@ class Organization(db.Model, UserMixin):
 
     parent = db.relationship('Organization', remote_side=[ID], backref='organization', uselist=False)
 
+    children = db.relationship('Organization')
+
     def to_json(self):
         return {
-            'id': self.ID,
-            'createdatetime': self.CREATEDATETIME,
-            'updatedatetime': self.UPDATEDATETIME,
-            'name': self.NAME,
+            'deptId': self.ID,
+            'createTime': self.CREATEDATETIME,
+            'updateTime': self.UPDATEDATETIME,
+            'deptName': self.NAME,
             'address': self.ADDRESS,
             'code': self.CODE,
             'iconCls': self.ICONCLS,
-            'seq': self.SEQ,
-            'pid': self.get_pid(),
+            'orderNum': self.SEQ,
+            'parentId': self.get_pid(),
+            'leader': self.LEADER,
+            'phone': self.PHONE,
+            'email': self.EMAIL,
+            'status': '0',
+            'children': [
+                org.to_json() for org in self.children
+            ]
+        }
+    
+    def to_tree_select_json(self):
+        return {
+            'id': self.ID,
+            'label': self.NAME,
+            'children': [org.to_tree_select_json() for org in self.children]
         }
 
     def get_pid(self):

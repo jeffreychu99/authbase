@@ -1,4 +1,8 @@
 # coding:utf-8
+import imp
+from operator import or_
+
+from app.models.Organization import Organization
 from ..base import base
 from ..models import Role, Resource, User
 from flask import render_template, request
@@ -7,19 +11,9 @@ from flask import jsonify
 from datetime import datetime
 from .. import  db
 import uuid
-
-@base.route('/securityJsp/base/Syrole.jsp', methods=['GET'])
-def index_role():
-    return render_template('role/index.html')
-
-@base.route('/securityJsp/base/SyroleForm.jsp', methods=['GET'])
-def form_role():
-    return render_template('role/form.html', id=request.args.get('id', ''))
-
-
-@base.route('/securityJsp/base/SyroleGrant.jsp', methods=['GET'])
-def grant_role_page():
-    return render_template('role/grant.html', id=request.args.get('id', ''))
+from sqlalchemy import desc
+from sqlalchemy import asc
+from sqlalchemy import or_
 
 @base.route('/base/syrole!doNotNeedSecurity_getRolesTree.action', methods=['POST'])
 def get_roles_tree():
@@ -32,75 +26,165 @@ def get_roles_by_userId():
     return jsonify([role.to_json() for role in roles])
 
 
-@base.route('/base/syrole!grant.action', methods=['POST'])
-def grant_role():
-    id = request.form.get('id')
-    ids = request.form.get('ids')
+@base.route('/system/role/authUser/cancelAll', methods=['PUT'])
+def cancel_all_role():
+    roleId = request.args.get('roleId')
+    userIds = request.args.get('userIds')
 
-    role = Role.query.get(id)
+    #role = Role.query.get(roleId)
+    idList = userIds.split(',')
+    #toCancelUsers = [User.query.get(uid) for uid in idList]
+    #role.users = [user2  for user2 in role.users.all() for user in toCancelUsers if user2.ID != user.ID ]
+    for userId in idList:
+        user = User.query.get(userId)
+        user.roles = [role for role in user.roles.all() if role.ID != roleId]
+        db.session.add(user)
 
-    if not ids: #授权资源为空
-        role.resources = []
-    else:       #授权资源访问，资源之间以逗号分割
-        idList = ids.split(',')
-        role.resources = [Resource.query.get(rid) for rid in idList]
+    return jsonify({'code': 200, 'msg': '取消成功'})
 
-    db.session.add(role)
+@base.route('/system/role/authUser/cancel', methods=['PUT'])
+def cancel_role():
+    roleId = request.json.get('roleId')
+    userId = request.json.get('userId')
 
-    return jsonify({'success': True})
+    user = User.query.get(userId)
+    user.roles = [role for role in user.roles.all() if role.ID != roleId]
+    db.session.add(user)
 
-@base.route('/base/syrole!grid.action', methods=['POST'])
+    return jsonify({'code': 200, 'msg': '取消成功'})
+
+@base.route('/system/role/list', methods=['GET'])
 def grid():
-    page = request.form.get('page', 1, type=int)
-    rows = request.form.get('rows', 10, type=int)
-    pagination = current_user.roles.paginate(
+    filters = []
+    if request.args.get('roleName'):
+        filters.append(Role.NAME.like('%' + request.args.get('roleName') + '%'))
+
+    order_by = []
+    if request.form.get('sort'):
+        if request.form.get('order') == 'asc':
+            order_by.append(asc(getattr(Role,request.form.get('sort').upper())))
+        elif request.form.get('order') == 'desc':
+            order_by.append(desc(getattr(Role,request.form.get('sort').upper())))
+        else:
+            order_by.append(getattr(Role,request.form.get('sort').upper()))
+
+    page = request.args.get('pageNum', 1, type=int)
+    rows = request.args.get('pageSize', 10, type=int)
+    pagination = current_user.roles.filter(*filters).order_by(*order_by).paginate(
         page, per_page=rows, error_out=False)
     roles = pagination.items
 
-    return jsonify([role.to_json() for role in roles])
+    return jsonify({'rows': [role.to_json() for role in roles], 'total': pagination.total})
 
-@base.route('/base/syrole!getById.action', methods=['POST'])
-def syrole_getById():
-    role = Role.query.get(request.form.get('id'))
+@base.route('/system/role/<string:id>', methods=['GET'])
+def syrole_getById(id):
+    role = Role.query.get(id)
 
     if role:
-        return jsonify(role.to_json())
+        return jsonify({'code': 200, 'msg': '操作成功', 'data': role.to_json()})
     else:
         return jsonify({'success': False, 'msg': 'error'})
 
-@base.route('/base/syrole!update.action', methods=['POST'])
+@base.route('/system/role', methods=['PUT'])
 def syrole_update():
-    role = Role.query.get(request.form.get('data.id'))
+    role = Role.query.get(request.json['roleId'])
 
     role.UPDATEDATETIME = datetime.now()
-    role.NAME = request.form.get('data.name')
-    role.DESCRIPTION = request.form.get('data.description')
-    role.SEQ = request.form.get('data.seq')
+    role.NAME = request.json['roleName']
+    role.DESCRIPTION = request.json['remark']
+    role.SEQ = request.json['roleSort']
+    if 'roleKey' in request.json: role.ROLEKEY = request.json['roleKey']
+    if 'dataScope' in request.json: role.DATASCOPE = request.json['dataScope']
+
+    if 'menuIds' in request.json:
+        res_list = [Resource.query.get(menuId) for menuId in request.json['menuIds']]
+        role.resources = res_list
 
     db.session.add(role)
 
-    return jsonify({'success': True})
+    return jsonify({'code': 200, 'msg': '操作成功'})
 
-@base.route('/base/syrole!save.action', methods=['POST'])
+@base.route('/system/role', methods=['POST'])
 def syrole_save():
     role = Role()
 
-    role.ID = uuid.uuid4()
-    role.NAME = request.form.get('data.name')
-    role.DESCRIPTION = request.form.get('data.description')
-    role.SEQ = request.form.get('data.seq')
+    role.ID = str(uuid.uuid4())
+    role.NAME = request.json['roleName']
+    if 'roleKey' in request.json: role.ROLEKEY = request.json['roleKey']
+    if 'remark' in request.json: role.DESCRIPTION = request.json['remark']
+    role.SEQ = request.json['roleSort']
+    if 'dataScope' in request.json: role.DATASCOPE = request.json['dataScope']
 
+    if 'menuIds' in request.json:
+        res_list = [Resource.query.get(menuId) for menuId in request.json['menuIds']]
+        role.resources = res_list
+        
     # add current use to new role
     current_user.roles.append(role)
 
     db.session.add(role)
 
-    return jsonify({'success': True})
+    return jsonify({'code': 200, 'msg': '操作成功'})
 
-@base.route('/base/syrole!delete.action', methods=['POST'])
-def syrole_delete():
-    role = Role.query.get(request.form.get('id'))
+@base.route('/system/role/<string:id>', methods=['DELETE'])
+def syrole_delete(id):
+    role = Role.query.get(id)
     if role:
         db.session.delete(role)
 
-    return jsonify({'success': True})
+    return jsonify({'code': 200, 'msg': '操作成功'})
+
+@base.route('/system/role/authUser/allocatedList', methods=['GET'])
+def allocatedList():
+    page = request.args.get('pageNum', 1, type=int)
+    rows = request.args.get('pageSize', 10, type=int)
+    pagination = User.query.join(Role, User.roles).filter(Role.ID == request.args['roleId']).paginate(
+        page, per_page=rows, error_out=False)
+    users = pagination.items
+
+    return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total})
+
+@base.route('/system/role/authUser/unallocatedList', methods=['GET'])
+def unallocatedList():
+    page = request.args.get('pageNum', 1, type=int)
+    rows = request.args.get('pageNum', 10, type=int)
+    pagination = User.query.join(Role, User.roles).filter(or_(Role.ID != request.args['roleId'], Role.ID == None)).paginate(
+        page, per_page=rows, error_out=False)
+    users = pagination.items
+
+    return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total})
+
+
+@base.route('/system/dept/roleDeptTreeselect/<id>', methods=['GET'])
+def roleDeptTreeselect(id):
+    role = Role.query.get(id)
+    dept = Organization.query.get('0')
+
+    return jsonify({'code': 200, 'msg': '操作成功', 'checkedKeys': [dept.ID for dept in role.depts], \
+         'depts': [dept.to_tree_select_json()]})
+
+@base.route('/system/role/dataScope', methods=['PUT'])
+def syrole_dataScope():
+    role = Role.query.get(request.json['roleId'])
+
+    if 'dataScope' in request.json: role.DATASCOPE = request.json['dataScope']
+    if 'deptIds' in request.json:
+        dept_list = [Organization.query.get(deptId) for deptId in request.json['deptIds']]
+        role.depts = dept_list
+    
+    db.session.add(role)
+
+    return jsonify({'code': 200, 'msg': '操作成功'})
+
+@base.route('/system/role/authUser/selectAll', methods=['PUT'])
+def syrole_authUser_selectAll():
+    role = Role.query.get(request.args.get('roleId'))
+    userIds = request.args.get('userIds')
+
+    idList = userIds.split(',')
+    for userId in idList:
+        user = User.query.get(userId)
+        user.roles.append(role)
+        db.session.add(user)
+
+    return jsonify({'code': 200, 'msg': '操作成功'})

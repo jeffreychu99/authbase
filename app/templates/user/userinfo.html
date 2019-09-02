@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block head %}
+
+<script type="text/javascript">
+	$(function() {
+		$('#resources').tree({
+			parentField : 'pid',
+			data : {{resourceTreeJson|tojson}}
+		});
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+<body class="easyui-layout" data-options="fit:true,border:false">
+	<div data-options="region:'center',fit:true,border:false">
+		<table style="width: 100%;">
+			<tr>
+				<td><fieldset>
+						<legend>用户信息</legend>
+						<table class="table" style="width: 100%;">
+							<tr>
+								<th>用户ID</th>
+								<td>{{current_user.ID}}</td>
+								<th>使用IP</th>
+								<td>{{current_user.IP}}</td>
+							</tr>
+							<tr>
+								<th>登录名</th>
+								<td>{{current_user.LOGINNAME}}</td>
+								<th>姓名</th>
+								<td>{{current_user.NAME}}</td>
+							</tr>
+							<tr>
+								<th>性别</th>
+								<td>
+                                    {%if current_user.SEX == '1' %} '男' {% endif %}
+                                    {%if current_user.SEX == '0' %} '女' {% endif %}
+								</td>
+								<th>年龄</th>
+								<td>{{current_user.AGE}}</td>
+							</tr>
+							<tr>
+								<th>创建时间</th>
+								<td>{{current_user.CREATEDATETIME}}</td>
+								<th>最后修改时间</th>
+								<td>{{current_user.UPDATEDATETIME}}</td>
+							</tr>
+						</table>
+					</fieldset></td>
+			</tr>
+			<tr>
+				<td>
+					<fieldset>
+						<legend>权限信息</legend>
+						<table class="table" style="width: 100%;">
+							<thead>
+								<tr>
+									<th>角色</th>
+									<th>机构</th>
+									<th>权限</th>
+								</tr>
+							</thead>
+							<tr>
+								<td valign="top">
+                                    {% for role in current_user.roles %}
+                                        <ul>
+                                            <li title="{{role.NAME}}">{{role.DESCRIPTION}}</li>
+                                        </ul>
+                                    {% endfor %}
+								</td>
+								<td valign="top">
+                                    {% for org in current_user.organizations %}
+                                        <ul>
+                                            <li>{{org.NAME}}</li>
+                                        </ul>
+                                    {% endfor %}
+								</td>
+								<td valign="top"><ul id="resources"></ul></td>
+							</tr>
+						</table>
+					</fieldset>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+{% endblock %}

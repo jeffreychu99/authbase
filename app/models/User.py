@@ -26,6 +26,8 @@ class User(db.Model, UserMixin):
     AGE = db.Column(db.Integer)
     PHOTO = db.Column(db.String(200))
     EMPLOYDATE = db.Column(db.DATETIME, default=datetime.now)
+    EMAIL = db.Column(db.String(50))
+    PHONENUMBER = db.Column(db.String(11))
 
     organizations = db.relationship('Organization',
                                     secondary=user_organization_table,
@@ -57,14 +59,26 @@ class User(db.Model, UserMixin):
         return '<User %r>\n' %(self.NAME)
 
     def to_json(self):
-        return {
-            'id': self.ID,
-            'createdatetime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
-            'updatedatetime': self.UPDATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
-            'loginname': self.LOGINNAME,
-            'name': self.NAME,
+        json = {
+            'userId': self.ID,
+            'createTime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
+            'updateTime': self.UPDATEDATETIME.strftime('%Y-%m-%d %H:%M:%S'),
+            'userName': self.LOGINNAME,
+            'nickName': self.NAME,
             'sex': self.SEX,
             'age': self.AGE,
+            "status": "0",
             'photo': self.PHOTO,
+            'email': self.EMAIL,
+            'phonenumber': self.PHONENUMBER
             #'employdate': self.EMPLOYDATE.strftime('%Y-%m-%d %H:%M:%S'),
-        }        
+        }
+
+        if len(self.organizations) > 0:
+            json['dept']  = self.organizations[0].to_json()
+            json['deptId'] = self.organizations[0].ID
+
+        if len(self.roles.all()) > 0:
+            json['roles'] = [role.to_json() for role in self.roles.all()]
+
+        return json         

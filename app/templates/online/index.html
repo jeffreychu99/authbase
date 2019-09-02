@@ -6,6 +6,13 @@
 
 {% block head %}
 <script type="text/javascript">
+	var exportFun = function () {
+		var data = sy.serializeObject($('#searchForm'));
+
+		//data.sort = 't.syuser.name';
+		$.download(sy.contextPath + '/base/syonline!export.action', data);
+	};
+		
 	var grid;
 	$(function() {
 		grid = $('#grid').datagrid({
@@ -75,15 +82,15 @@
 						<table>
 							<tr>
 								<td>登录名</td>
-								<td><input name="QUERY_t#loginname_S_LK" style="width: 80px;" /></td>
+								<td><input name="loginname" style="width: 80px;" /></td>
 								<td>IP地址</td>
-								<td><input name="QUERY_t#ip_S_LK" style="width: 80px;" /></td>
+								<td><input name="ip" style="width: 80px;" /></td>
 								<td>类别</td>
-								<td><select name="QUERY_t#type_S_EQ" class="easyui-combobox" data-options="panelHeight:'auto',editable:false"><option value="">请选择</option>
+								<td><select name="type" class="easyui-combobox" data-options="panelHeight:'auto',editable:false"><option value="">请选择</option>
 										<option value="1">登录系统</option>
 										<option value="0">注销系统</option></select></td>
 								<td>创建时间</td>
-								<td><input name="QUERY_t#createdatetime_D_GE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="QUERY_t#createdatetime_D_LE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
+								<td><input name="createdatetime1" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="createdatetime2" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
 								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="grid.datagrid('load',sy.serializeObject($('#searchForm')));">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
 							</tr>
 						</table>
@@ -94,7 +101,7 @@
 				<td>
 					<table>
 						<tr>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="">导出</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="exportFun()">导出</a></td>
 						</tr>
 					</table>
 				</td>
