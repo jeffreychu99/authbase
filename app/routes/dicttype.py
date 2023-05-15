@@ -7,8 +7,10 @@ from flask import render_template, request, jsonify
 from sqlalchemy import asc
 from sqlalchemy import desc
 from .. import  db
+from flask_login import login_required
 
 @base.route('/system/dict/type/list', methods=['GET'])
+@login_required
 def sysdict_type_list():
     filters = []
     if 'dictName' in request.args:
@@ -33,12 +35,14 @@ def sysdict_type_list():
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [type.to_json() for type in types], 'total': pagination.total})
 
 @base.route('/system/dict/type/<id>', methods=['GET'])
+@login_required
 def sysdict_type_get_by_id(id):
     type = DictType.query.get(id)
 
     return jsonify({'msg': '操作成功', 'code': 200, 'data': type.to_json()})
 
 @base.route('/system/dict/type', methods=['POST'])
+@login_required
 def sysdict_type_add():
     dictType = DictType()
 
@@ -57,6 +61,7 @@ def sysdict_type_add():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/dict/type', methods=['PUT'])
+@login_required
 def sysdict_type_update():
     dictType = DictType.query.get(request.json['dictId'])
 
@@ -73,6 +78,7 @@ def sysdict_type_update():
     return jsonify({'msg': '操作成功', 'code': 200})
 
 @base.route('/system/dict/type/<string:ids>', methods=['DELETE'])
+@login_required
 def sytype_delete(ids):
     idList = ids.split(',')
     for id in idList:
@@ -83,6 +89,7 @@ def sytype_delete(ids):
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/dict/type/optionselect', methods=['GET'])
+@login_required
 def sysdict_type_all():
     types = DictData.query.all()
 

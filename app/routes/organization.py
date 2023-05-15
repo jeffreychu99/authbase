@@ -12,6 +12,7 @@ from datetime import datetime
 import uuid
 
 @base.route('/base/syorganization!grant.action', methods=['POST'])
+@login_required
 def grant_organization_resource():
     id = request.form.get('id')
     ids = request.form.get('ids')
@@ -54,6 +55,7 @@ def syorganization_dept_list_exclude(id):
     return jsonify({'msg': '操作成功', 'code': 200, "data": [org.to_json() for org in orgs]})
 
 @base.route('/base/syorganization!doNotNeedSecurity_comboTree.action', methods=['POST'])
+@login_required
 def syorganization_comboTree():
     orgs = Organization.query.all()
 
@@ -61,16 +63,19 @@ def syorganization_comboTree():
 
 
 @base.route('/base/syorganization!doNotNeedSecurity_getSyorganizationsTree.action', methods=['POST'])
+@login_required
 def get_syorganizations_tree():
     orgs = Organization.query.join(User, Organization.users).filter(User.ID == current_user.ID).all()
     return jsonify([org.to_json() for org in orgs])
 
 @base.route('/base/syorganization!doNotNeedSecurity_getSyorganizationByUserId.action', methods=['POST'])
+@login_required
 def get_syorganization_by_userId():
     orgs = Organization.query.join(User, Organization.users).filter(User.ID == request.form.get('id')).all()
     return jsonify([org.to_json() for org in orgs])
 
 @base.route('/system/dept/<string:id>', methods=['GET'])
+@login_required
 def syorganization_getById(id):
     org = Organization.query.get(id)
 
@@ -80,6 +85,7 @@ def syorganization_getById(id):
         return jsonify({'success': False, 'msg': 'error'})
 
 @base.route('/system/dept', methods=['PUT'])
+@login_required
 def syorganization_update():
     org = Organization.query.get(request.json['deptId'])
 
@@ -96,6 +102,7 @@ def syorganization_update():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/dept', methods=['POST'])
+@login_required
 def syorganization_save():
     org = Organization()
     org.ID = str(uuid.uuid4())

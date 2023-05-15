@@ -14,19 +14,23 @@ import uuid
 from sqlalchemy import desc
 from sqlalchemy import asc
 from sqlalchemy import or_
+from flask_login import login_required
 
 @base.route('/base/syrole!doNotNeedSecurity_getRolesTree.action', methods=['POST'])
+@login_required
 def get_roles_tree():
     roles = Role.query.join(User, Role.users).filter(User.ID == current_user.ID).all()
     return jsonify([role.to_json() for role in roles])
 
 @base.route('/base/syrole!doNotNeedSecurity_getRoleByUserId.action', methods=['POST'])
+@login_required
 def get_roles_by_userId():
     roles = Role.query.join(User, Role.users).filter(User.ID == request.form.get('id')).all()
     return jsonify([role.to_json() for role in roles])
 
 
 @base.route('/system/role/authUser/cancelAll', methods=['PUT'])
+@login_required
 def cancel_all_role():
     roleId = request.args.get('roleId')
     userIds = request.args.get('userIds')
@@ -43,6 +47,7 @@ def cancel_all_role():
     return jsonify({'code': 200, 'msg': '取消成功'})
 
 @base.route('/system/role/authUser/cancel', methods=['PUT'])
+@login_required
 def cancel_role():
     roleId = request.json.get('roleId')
     userId = request.json.get('userId')
@@ -54,6 +59,7 @@ def cancel_role():
     return jsonify({'code': 200, 'msg': '取消成功'})
 
 @base.route('/system/role/list', methods=['GET'])
+@login_required
 def grid():
     filters = []
     if request.args.get('roleName'):
@@ -77,6 +83,7 @@ def grid():
     return jsonify({'rows': [role.to_json() for role in roles], 'total': pagination.total})
 
 @base.route('/system/role/<string:id>', methods=['GET'])
+@login_required
 def syrole_getById(id):
     role = Role.query.get(id)
 
@@ -86,6 +93,7 @@ def syrole_getById(id):
         return jsonify({'success': False, 'msg': 'error'})
 
 @base.route('/system/role', methods=['PUT'])
+@login_required
 def syrole_update():
     role = Role.query.get(request.json['roleId'])
 
@@ -105,6 +113,7 @@ def syrole_update():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/role', methods=['POST'])
+@login_required
 def syrole_save():
     role = Role()
 
@@ -127,6 +136,7 @@ def syrole_save():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/role/<string:id>', methods=['DELETE'])
+@login_required
 def syrole_delete(id):
     role = Role.query.get(id)
     if role:
@@ -135,6 +145,7 @@ def syrole_delete(id):
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/role/authUser/allocatedList', methods=['GET'])
+@login_required
 def allocatedList():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
@@ -145,6 +156,7 @@ def allocatedList():
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total})
 
 @base.route('/system/role/authUser/unallocatedList', methods=['GET'])
+@login_required
 def unallocatedList():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageNum', 10, type=int)
@@ -156,6 +168,7 @@ def unallocatedList():
 
 
 @base.route('/system/dept/roleDeptTreeselect/<id>', methods=['GET'])
+@login_required
 def roleDeptTreeselect(id):
     role = Role.query.get(id)
     dept = Organization.query.get('0')
@@ -164,6 +177,7 @@ def roleDeptTreeselect(id):
          'depts': [dept.to_tree_select_json()]})
 
 @base.route('/system/role/dataScope', methods=['PUT'])
+@login_required
 def syrole_dataScope():
     role = Role.query.get(request.json['roleId'])
 
@@ -177,6 +191,7 @@ def syrole_dataScope():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/role/authUser/selectAll', methods=['PUT'])
+@login_required
 def syrole_authUser_selectAll():
     role = Role.query.get(request.args.get('roleId'))
     userIds = request.args.get('userIds')

@@ -22,7 +22,7 @@ class CustomJSONEncoder(JSONEncoder):
 
 loginmanager = LoginManager()
 loginmanager.session_protection = 'strong'
-loginmanager.login_view = 'base.login'
+#loginmanager.login_view = 'base.login'
 
 moment = Moment()
 db = SQLAlchemy()

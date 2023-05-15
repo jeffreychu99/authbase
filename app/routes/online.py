@@ -4,8 +4,10 @@ from flask import render_template, request, jsonify
 from sqlalchemy import asc
 from sqlalchemy import desc
 import flask_excel as excel
+from flask_login import login_required
 
 @base.route('/monitor/logininfor/list', methods=['GET'])
+@login_required
 def grid_online():
     filters = []
     if request.args.get('userName'):
@@ -36,6 +38,7 @@ def grid_online():
     return jsonify({'total': OnLine.query.count(), 'rows': [online.to_json() for online in onlines], 'code': 200})
 
 @base.route('/base/syonline!export.action', methods=['POST'])
+@login_required
 def online_export():
     rows = []
     rows.append(['登录名', 'IP地址', '创建时间', '类别'])

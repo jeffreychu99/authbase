@@ -14,6 +14,7 @@ from sqlalchemy import desc
 import flask_excel as excel
 
 @base.route('/base/syuser!grantOrganization.action', methods=['POST'])
+@login_required
 def grant_user_organization():
     id = request.form.get('id')
     ids = request.form.get('ids')
@@ -31,6 +32,7 @@ def grant_user_organization():
     return jsonify({'success': True})
 
 @base.route('/system/user/authRole', methods=['PUT'])
+@login_required
 def grant_user_role():
     id = request.args['userId']
     ids = request.args['roleIds']
@@ -47,6 +49,7 @@ def grant_user_role():
 
     return jsonify({'code': 200, 'msg': '操作成功'})
 
+@login_required
 def record_login_history(type):
     online = OnLine()
     online.ID = str(uuid.uuid4())
@@ -79,6 +82,7 @@ def do_login():
     return jsonify({'msg': '登录失败,账号密码错误~', 'code': 500})
 
 @base.route('/system/user/list', methods=['GET'])
+@login_required
 def user_grid():
     filters = []
     if 'userName' in request.args:
@@ -107,6 +111,7 @@ def user_grid():
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total, 'code': 200, 'msg': '查询成功'})
 
 @base.route('/system/user/', methods=['GET'])
+@login_required
 def syuser_get():
     json = {'code': 200, 'msg': ''}
     json['roles'] = [role.to_json() for role in Role.query.all()]
@@ -114,6 +119,7 @@ def syuser_get():
     return jsonify(json)
 
 @base.route('/system/user/<id>', methods=['GET'])
+@login_required
 def syuser_getById(id):
     user = User.query.get(id)
 
@@ -128,6 +134,7 @@ def syuser_getById(id):
         return jsonify({'success': False, 'msg': 'error'})
 
 @base.route('/system/user', methods=['PUT'])
+@login_required
 def syuser_update():
     id = request.json['userId']
     userName = request.json['userName']
@@ -151,6 +158,7 @@ def syuser_update():
     return jsonify({'code': 200, 'msg': '更新成功！'})
 
 @base.route('/system/user', methods=['POST'])
+@login_required
 def syuser_save():
     if User.query.filter_by(LOGINNAME = request.json['userName']).first():
         return jsonify({'success': False, 'msg': '新建用户失败，用户名已存在！'})
@@ -182,6 +190,7 @@ def syuser_save():
     return jsonify({'code': 200, 'msg': '新建用户成功！'})
 
 @base.route('/system/user/<id>', methods=['DELETE'])
+@login_required
 def syuser_delete(id):
     user = User.query.get(id)
     if user:
@@ -190,6 +199,7 @@ def syuser_delete(id):
     return jsonify({'code': 200, 'msg': '删除成功'})
 
 @base.route('/system/user/profile/updatePwd', methods=['PUT']) 
+@login_required
 def syuser_update_pwd():
     user = User.query.get(current_user.ID)
 
@@ -255,6 +265,7 @@ def syuser_update_profile():
     return jsonify({'code': 200, 'msg': '更新成功！'})
 
 @base.route('/system/user/authRole/<id>', methods=['GET'])
+@login_required
 def syuser_auth_role(id):
     user = User.query.get(id)
     userRoles = [role for role in user.roles]
@@ -267,6 +278,7 @@ def syuser_auth_role(id):
     return jsonify({'code': 200, 'msg': '操作成功', 'roles': [role.to_json() for role in allRoles], 'user': user.to_json()})
 
 @base.route('/base/syuser!export.action', methods=['POST'])
+@login_required
 def user_export():
     rows = []
     rows.append(['登录名', '姓名', '创建时间', '修改时间', '性别'])

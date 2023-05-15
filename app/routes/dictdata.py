@@ -7,8 +7,10 @@ from flask import render_template, request, jsonify
 from sqlalchemy import asc
 from sqlalchemy import desc
 from .. import  db
+from flask_login import login_required
 
 @base.route('/system/dict/data/type/<dictType>', methods=['GET'])
+@login_required
 def sysdictdata_get_by_type(dictType):
     data_list = DictData.query.filter(DictData.dict_type == dictType)
 
@@ -16,6 +18,7 @@ def sysdictdata_get_by_type(dictType):
 
 
 @base.route('/system/dict/data/list', methods=['GET'])
+@login_required
 def sysdict_data_list():
     filters = []
     if 'dictLabel' in request.args:
@@ -35,12 +38,14 @@ def sysdict_data_list():
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [data.to_json() for data in data_list], 'total': pagination.total})
 
 @base.route('/system/dict/data/<id>', methods=['GET'])
+@login_required
 def sysdict_data_get_by_id(id):
     data = DictData.query.get(id)
 
     return jsonify({'msg': '操作成功', 'code': 200, 'data': data.to_json()})
 
 @base.route('/system/dict/data', methods=['POST'])
+@login_required
 def sysdict_data_add():
     dictData = DictData()
 
@@ -59,6 +64,7 @@ def sysdict_data_add():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/dict/data', methods=['PUT'])
+@login_required
 def sysdict_data_update():
     dictData = DictData.query.get(request.json['dictCode'])
 
@@ -79,6 +85,7 @@ def sysdict_data_update():
     return jsonify({'msg': '操作成功', 'code': 200})
 
 @base.route('/system/dict/data/<string:ids>', methods=['DELETE'])
+@login_required
 def sydata_delete(ids):
     idList = ids.split(',')
     for id in idList:

@@ -8,8 +8,10 @@ from flask import render_template, request, jsonify
 from sqlalchemy import asc
 from sqlalchemy import desc
 from .. import  db
+from flask_login import login_required
 
 @base.route('/system/config/configKey/<configKey>', methods=['GET'])
+@login_required
 def sysconfig_get_value(configKey):
     data = Config.query.filter(Config.config_key == configKey).first()
 
@@ -17,6 +19,7 @@ def sysconfig_get_value(configKey):
 
 
 @base.route('/system/config/list', methods=['GET'])
+@login_required
 def sys_config_list():
     filters = []
     if 'configName' in request.args:
@@ -39,12 +42,14 @@ def sys_config_list():
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [config.to_json() for config in config_list], 'total': pagination.total})
 
 @base.route('/system/config/<id>', methods=['GET'])
+@login_required
 def sysconfig_get_by_id(id):
     config = Config.query.get(id)
 
     return jsonify({'msg': '操作成功', 'code': 200, 'data': config.to_json()})
 
 @base.route('/system/config', methods=['POST'])
+@login_required
 def sysconfig_add():
     config = Config()
 
@@ -62,6 +67,7 @@ def sysconfig_add():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/config', methods=['PUT'])
+@login_required
 def sysconfig_update():
     config = Config.query.get(request.json['configId'])
 
@@ -79,6 +85,7 @@ def sysconfig_update():
     return jsonify({'msg': '操作成功', 'code': 200})
 
 @base.route('/system/config/<string:ids>', methods=['DELETE'])
+@login_required
 def syconfig_delete(ids):
     idList = ids.split(',')
     for id in idList:

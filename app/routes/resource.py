@@ -12,8 +12,10 @@ import uuid
 from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy import asc
+from flask_login import login_required
 
 @base.route('/base/syresource!doNotNeedSecurity_getMainMenu.action', methods=['POST'])
+@login_required
 def resource_grid():
     rs = Resource.query.join(Role, Resource.roles).join(User, Role.users).filter(User.ID == current_user.ID).all()
 
@@ -21,25 +23,30 @@ def resource_grid():
 
 
 @base.route('/base/syresourcetype!doNotNeedSecurity_combobox.action', methods=['POST'])
+@login_required
 def resource_type_combox():
     rt = ResourceType.query.all()
     return jsonify([r.to_json() for r in rt])
 
 @base.route('/base/syresource!doNotNeedSecurity_getRoleResources.action', methods=['POST'])
+@login_required
 def get_role_resources():
     resources = Resource.query.join(Role, Resource.roles).filter(Role.ID == request.form.get('id')).all()
     return jsonify([res.to_json() for res in resources])
 
 @base.route('/base/syresource!doNotNeedSecurity_getResourcesTree.action', methods=['POST'])
+@login_required
 def get_resources_tree():
     return syresource_treeGrid()
 
 @base.route('/base/syresource!doNotNeedSecurity_getOrganizationResources.action', methods=['POST'])
+@login_required
 def get_organization_resources():
     resources = Resource.query.join(Organization, Resource.organizations).filter(Organization.ID == request.form.get('id')).all()
     return jsonify([res.to_json() for res in resources])    
 
 @base.route('/system/menu/list', methods=['GET'])
+@login_required
 def syresource_treeGrid():
     filters = []
     if 'menuName' in request.args:
@@ -54,12 +61,14 @@ def syresource_treeGrid():
     return jsonify({"msg":"操作成功","code":200, "data": [org.to_json() for org in res_list]})
 
 @base.route('/base/syresource!doNotNeedSecurity_comboTree.action', methods=['POST'])
+@login_required
 def syresource_comboTree():
     res_list = Resource.query.all()
 
     return jsonify([org.to_json() for org in res_list])
 
 @base.route('/system/menu/<id>', methods=['GET'])
+@login_required
 def syresource_getById(id):
     res = Resource.query.get(id)
 
@@ -69,6 +78,7 @@ def syresource_getById(id):
         return jsonify({'success': False, 'msg': 'error'})
 
 @base.route('/system/menu', methods=['PUT'])
+@login_required
 def syresource_update():
     res = Resource.query.get(request.json['menuId'])
 
@@ -87,6 +97,7 @@ def syresource_update():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/menu', methods=['POST'])
+@login_required
 def syresource_save():
     res = Resource()
 
@@ -105,6 +116,7 @@ def syresource_save():
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/menu/<id>', methods=['DELETE'])
+@login_required
 def syresource_delete(id):
     res = Resource.query.get(id)
     if res:
@@ -113,12 +125,14 @@ def syresource_delete(id):
     return jsonify({'code': 200, 'msg': '操作成功'})
 
 @base.route('/system/menu/treeselect', methods=['GET'])
+@login_required
 def syresource_tree_select():
     resList = Resource.query.filter(Resource.SYRESOURCE_ID == None)
 
     return jsonify({'msg': '操作成功', 'code': 200, "data": [res.to_tree_select_json() for res in resList]})
 
 @base.route('/system/menu/roleMenuTreeselect/<roleId>', methods=['GET'])
+@login_required
 def syresource_role_tree_select(roleId):
     role = Role.query.get(roleId)
     resList = Resource.query.filter(Resource.SYRESOURCE_ID == None)
