@@ -1,5 +1,9 @@
 #基于Flask实现后台权限管理系统
 
+**升级Flask版本到2.2.5及其其它相关依赖**
+
+**python后台启动方式更新: python3.x -m flask --app start run**
+
 **重磅！！！！！！！！！！！**
 
 **全新的风格界面，完全的前后端分离。基于ElementUI，前端代码基于RuoYi-UI，后端接口进行适配**
@@ -53,14 +57,11 @@
 **后端依赖插件**
 
  1. Flask
- 2. Flask-Migrate
- 3. Flask-Script
- 4. Flask-SQLAlchemy
- 5. Flask-Login
- 6. itsdangerous
- 7. Jinja2
- 8. Werkzeug
- 9. mysql-connector
+ 2. Flask-SQLAlchemy
+ 3. Flask-Login
+ 4. Flask-moment
+ 5. MySQL-connector-python
+ 6. Flask-Excel
 
 **使用方法**
 
@@ -75,8 +76,8 @@
 
 1. 导入根目录下db.sql数据库脚本到mysql数据库
 2. pip3 install -r requirements.txt
-3. 更改config.py 数据库连接，提供用户名密码。
-4. python manager.py runserver [-h 0.0.0.0] [-p 8080]
+3. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码。
+4. python3.x -m flask --app start run [-h 0.0.0.0] [-p 8080]
  
 **讨论群**
 

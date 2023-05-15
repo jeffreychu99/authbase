@@ -7,7 +7,7 @@ from flask import jsonify
 class Resource(db.Model, UserMixin):
     __tablename__ = 'SYRESOURCE'
     __mapper_args__ = {
-     "order_by": 'SEQ'
+     #"order_by": 'SEQ'
     }
     ID = db.Column(db.String(36), primary_key=True)
     CREATEDATETIME = db.Column(db.DateTime, index=True, default=datetime.now)

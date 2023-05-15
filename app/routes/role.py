@@ -71,7 +71,7 @@ def grid():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
     pagination = current_user.roles.filter(*filters).order_by(*order_by).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     roles = pagination.items
 
     return jsonify({'rows': [role.to_json() for role in roles], 'total': pagination.total})
@@ -139,7 +139,7 @@ def allocatedList():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
     pagination = User.query.join(Role, User.roles).filter(Role.ID == request.args['roleId']).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     users = pagination.items
 
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total})
@@ -149,7 +149,7 @@ def unallocatedList():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageNum', 10, type=int)
     pagination = User.query.join(Role, User.roles).filter(or_(Role.ID != request.args['roleId'], Role.ID == None)).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     users = pagination.items
 
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total})

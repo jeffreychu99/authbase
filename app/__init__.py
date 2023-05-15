@@ -6,8 +6,10 @@ from flask_login import LoginManager
 import flask_excel as excel
 
 
-from flask.json import JSONEncoder
+from flask import json
 from datetime import datetime, date
+
+JSONEncoder = json.JSONEncoder
 
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):

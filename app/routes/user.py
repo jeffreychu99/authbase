@@ -101,7 +101,7 @@ def user_grid():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
     pagination = User.query.filter(*filters).order_by(*order_by).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     users = pagination.items
 
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total, 'code': 200, 'msg': '查询成功'})

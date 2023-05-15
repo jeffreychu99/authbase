@@ -29,7 +29,7 @@ def sysdict_data_list():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
     pagination = DictData.query.filter(*filters).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     data_list = pagination.items
 
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [data.to_json() for data in data_list], 'total': pagination.total})

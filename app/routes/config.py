@@ -33,8 +33,7 @@ def sys_config_list():
 
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
-    pagination = Config.query.filter(*filters).paginate(
-        page, per_page=rows, error_out=False)
+    pagination = Config.query.filter(*filters).paginate(page=page, per_page=rows, error_out=False)
     config_list = pagination.items
 
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [config.to_json() for config in config_list], 'total': pagination.total})

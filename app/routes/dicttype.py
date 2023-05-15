@@ -27,7 +27,7 @@ def sysdict_type_list():
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
     pagination = DictType.query.filter(*filters).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     types = pagination.items
 
     return jsonify({'msg': '操作成功', 'code': 200, 'rows': [type.to_json() for type in types], 'total': pagination.total})

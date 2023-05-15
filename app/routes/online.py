@@ -30,7 +30,7 @@ def grid_online():
     page = request.form.get('page', 1, type=int)
     rows = request.form.get('rows', 10, type=int)
     pagination = OnLine.query.filter(*filters).order_by(*order_by).paginate(
-        page, per_page=rows, error_out=False)
+        page=page, per_page=rows, error_out=False)
     onlines = pagination.items
 
     return jsonify({'total': OnLine.query.count(), 'rows': [online.to_json() for online in onlines], 'code': 200})
