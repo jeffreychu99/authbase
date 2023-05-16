@@ -91,6 +91,7 @@ def syresource_update():
     if 'perms' in request.json: res.PERMS = request.json['perms']
     if 'menuType' in request.json: res.SYRESOURCETYPE_ID = '1' if request.json['menuType'] == 'F' else '0' if request.json['menuType'] == 'C' else '3'
     if 'parentId' in request.json: res.parent = Resource.query.get(request.json['parentId'])
+    if 'status' in request.json: res.STATUS = request.json['status']
 
     db.session.add(res)
 
@@ -110,6 +111,7 @@ def syresource_save():
     if 'perms' in request.json: res.PERMS = request.json['perms']
     if 'menuType' in request.json: res.SYRESOURCETYPE_ID = '1' if request.json['menuType'] == 'F' else '0' if request.json['menuType'] == 'F' else '3'
     if 'parentId' in request.json: res.parent = Resource.query.get(request.json['parentId'])
+    if 'status' in request.json: res.STATUS = request.json['status']
 
     db.session.add(res)
 

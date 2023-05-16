@@ -298,3 +298,16 @@ def user_export():
 
     return excel.make_response_from_array(rows, "csv",
                                           file_name="user")
+
+
+@base.route('/system/user/changeStatus', methods=['PUT'])
+@login_required
+def syuser_status_update():
+    user = User.query.get(request.json['userId'])
+
+    if 'status' in request.json: user.STATUS = request.json['status']
+
+    db.session.add(user)
+
+    return jsonify({'code': 200, 'msg': '操作成功'})
+

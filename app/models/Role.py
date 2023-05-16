@@ -23,6 +23,7 @@ class Role(db.Model, UserMixin):
     SEQ = db.Column(db.Integer)
     ROLEKEY = db.Column(db.String(100))
     DATASCOPE = db.Column(db.Integer)
+    STATUS = db.Column(db.String(10))
 
     #包含资源
     resources = db.relationship('Resource',
@@ -52,7 +53,7 @@ class Role(db.Model, UserMixin):
             'remark': self.DESCRIPTION,
             'iconCls': self.ICONCLS,
             'roleSort': self.SEQ,
-            'status': '0',
+            'status': self.STATUS,
             'roleKey': self.ROLEKEY,
             'dataScope': self.DATASCOPE
         }

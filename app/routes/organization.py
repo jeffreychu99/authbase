@@ -96,6 +96,7 @@ def syorganization_update():
     if 'phone' in request.json: org.PHONE = request.json['phone']
     if 'orderNum' in request.json:  org.SEQ = request.json['orderNum']
     if 'parentId' in request.json: org.parent = Organization.query.get(request.json['parentId'])
+    if 'status' in request.json: org.STATUS = request.json['status']
 
     db.session.add(org)
 
@@ -112,6 +113,7 @@ def syorganization_save():
     if 'phone' in request.json: org.PHONE = request.json['phone']
     if 'orderNum' in request.json: org.SEQ = request.json['orderNum']
     if 'parentId' in request.json: org.parent = Organization.query.get(request.json['parentId'])
+    if 'status' in request.json: org.STATUS = request.json['status']
 
     # add organization to current user
     current_user.organizations.append(org)

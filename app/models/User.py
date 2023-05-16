@@ -28,6 +28,7 @@ class User(db.Model, UserMixin):
     EMPLOYDATE = db.Column(db.DATETIME, default=datetime.now)
     EMAIL = db.Column(db.String(50))
     PHONENUMBER = db.Column(db.String(11))
+    STATUS = db.Column(db.String(10))
 
     organizations = db.relationship('Organization',
                                     secondary=user_organization_table,
@@ -67,7 +68,7 @@ class User(db.Model, UserMixin):
             'nickName': self.NAME,
             'sex': self.SEX,
             'age': self.AGE,
-            "status": "0",
+            "status": self.STATUS,
             'photo': self.PHOTO,
             'email': self.EMAIL,
             'phonenumber': self.PHONENUMBER

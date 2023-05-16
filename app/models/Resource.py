@@ -29,6 +29,8 @@ class Resource(db.Model, UserMixin):
 
     children = db.relationship('Resource')
 
+    STATUS = db.Column(db.String(10))
+
     def get_id(self):
         return str(self.ID)
 
@@ -45,7 +47,7 @@ class Resource(db.Model, UserMixin):
             'target': self.TARGET,
             'parentId': self.get_pid(),
             'syresourcetype': self.get_type_json(),
-            'status': '0',
+            'status': self.STATUS,
             'visible': '0',
             'isFrame': '1',
             'path': self.PATH,

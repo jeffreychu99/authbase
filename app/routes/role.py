@@ -203,3 +203,14 @@ def syrole_authUser_selectAll():
         db.session.add(user)
 
     return jsonify({'code': 200, 'msg': '操作成功'})
+
+@base.route('/system/role/changeStatus', methods=['PUT'])
+@login_required
+def syrole_status_update():
+    role = Role.query.get(request.json['roleId'])
+
+    if 'status' in request.json: role.STATUS = request.json['status']
+
+    db.session.add(role)
+
+    return jsonify({'code': 200, 'msg': '操作成功'})

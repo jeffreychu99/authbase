@@ -20,6 +20,7 @@ class Organization(db.Model, UserMixin):
     LEADER = db.Column(db.String(20))
     PHONE = db.Column(db.String(11))
     EMAIL = db.Column(db.String(50))
+    STATUS = db.Column(db.String(10))
 
     resources = db.relationship('Resource',
                                 secondary=organization_resource_table,
@@ -45,7 +46,7 @@ class Organization(db.Model, UserMixin):
             'leader': self.LEADER,
             'phone': self.PHONE,
             'email': self.EMAIL,
-            'status': '0',
+            'status': self.STATUS,
             'children': [
                 org.to_json() for org in self.children
             ]
