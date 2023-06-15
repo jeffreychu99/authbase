@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t authbase:1.0 .
+docker build -t zisokal/authbase:1.1 .

@@ -38,10 +38,10 @@
 
 如何使用
 
-1. docker pull docker push zisokal/authbase:1.0
-2. docker run -d -p 5000:5000 \
+1. docker pull zisokal/authbase:1.1
+2. docker run -d -p 5000:5000 -p 80:80 \
 	-e DEV_DATABASE_URI=mysql+mysqlconnector://authbase:123456@127.0.0.1/authbase?charset=utf8 \
-	--name authbase authbase:1.0
+	--name authbase zisokal/authbase:1.1
 3. 打开浏览器访问页面 http://localhost:5000。系统默认的登录名密码为admin/123456
 
 

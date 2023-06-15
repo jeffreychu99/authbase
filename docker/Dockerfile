@@ -9,7 +9,9 @@ ADD pip.conf /root/.pip/pip.conf
 ADD docker-entrypoint.sh /tmp/docker-entrypoint.sh
 
 RUN apt update && apt install -y git python3.8 python3-pip && \
+    apt install -y nodejs && apt install -y npm && \
     cd /opt && git clone https://gitee.com/zhujf21st/authbase.git && cd authbase && \
+    cd ui && npm install && cd .. && \
     pip3 install -r requirements.txt && \
     mv /tmp/docker-entrypoint.sh /opt/authbase/docker-entrypoint.sh && chmod +x /opt/authbase/docker-entrypoint.sh &&  \
     apt install -yq mysql-server && \
