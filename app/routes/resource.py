@@ -12,38 +12,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy import asc
-from flask_login import login_required
-
-@base.route('/base/syresource!doNotNeedSecurity_getMainMenu.action', methods=['POST'])
-@login_required
-def resource_grid():
-    rs = Resource.query.join(Role, Resource.roles).join(User, Role.users).filter(User.ID == current_user.ID).all()
-
-    return jsonify([r.to_menu_json() for r in rs])
-
-
-@base.route('/base/syresourcetype!doNotNeedSecurity_combobox.action', methods=['POST'])
-@login_required
-def resource_type_combox():
-    rt = ResourceType.query.all()
-    return jsonify([r.to_json() for r in rt])
-
-@base.route('/base/syresource!doNotNeedSecurity_getRoleResources.action', methods=['POST'])
-@login_required
-def get_role_resources():
-    resources = Resource.query.join(Role, Resource.roles).filter(Role.ID == request.form.get('id')).all()
-    return jsonify([res.to_json() for res in resources])
-
-@base.route('/base/syresource!doNotNeedSecurity_getResourcesTree.action', methods=['POST'])
-@login_required
-def get_resources_tree():
-    return syresource_treeGrid()
-
-@base.route('/base/syresource!doNotNeedSecurity_getOrganizationResources.action', methods=['POST'])
-@login_required
-def get_organization_resources():
-    resources = Resource.query.join(Organization, Resource.organizations).filter(Organization.ID == request.form.get('id')).all()
-    return jsonify([res.to_json() for res in resources])    
+from flask_login import login_required  
 
 @base.route('/system/menu/list', methods=['GET'])
 @login_required
@@ -59,13 +28,6 @@ def syresource_treeGrid():
     res_list = Resource.query.filter(*filters).order_by(*order_by)
 
     return jsonify({"msg":"操作成功","code":200, "data": [org.to_json() for org in res_list]})
-
-@base.route('/base/syresource!doNotNeedSecurity_comboTree.action', methods=['POST'])
-@login_required
-def syresource_comboTree():
-    res_list = Resource.query.all()
-
-    return jsonify([org.to_json() for org in res_list])
 
 @base.route('/system/menu/<id>', methods=['GET'])
 @login_required

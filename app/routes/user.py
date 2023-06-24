@@ -13,24 +13,6 @@ from sqlalchemy import asc, true
 from sqlalchemy import desc
 import flask_excel as excel
 
-@base.route('/base/syuser!grantOrganization.action', methods=['POST'])
-@login_required
-def grant_user_organization():
-    id = request.form.get('id')
-    ids = request.form.get('ids')
-
-    user = User.query.get(id)
-
-    if not ids:
-        user.organizations = []
-    else:
-        idList = ids.split(',')
-        user.organizations = [Organization.query.get(rid) for rid in idList]
-
-    db.session.add(user)
-
-    return jsonify({'success': True})
-
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
 def grant_user_role():
@@ -277,7 +259,7 @@ def syuser_auth_role(id):
 
     return jsonify({'code': 200, 'msg': '操作成功', 'roles': [role.to_json() for role in allRoles], 'user': user.to_json()})
 
-@base.route('/base/syuser!export.action', methods=['POST'])
+@base.route('/base/syuser/export', methods=['POST'])
 @login_required
 def user_export():
     rows = []

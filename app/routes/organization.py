@@ -11,24 +11,6 @@ from flask import render_template
 from datetime import datetime
 import uuid
 
-@base.route('/base/syorganization!grant.action', methods=['POST'])
-@login_required
-def grant_organization_resource():
-    id = request.form.get('id')
-    ids = request.form.get('ids')
-
-    org = Organization.query.get(id)
-
-    if not ids:
-        org.resources = []
-    else:
-        idList = ids.split(',')
-        org.resources = [Resource.query.get(rid) for rid in idList]
-
-    db.session.add(org)
-
-    return jsonify({'success': True})    
-
 @base.route('/system/dept/list', methods=['GET'])
 @login_required
 def syorganization_treeGrid():
@@ -53,26 +35,6 @@ def syorganization_dept_list_exclude(id):
     orgs = Organization.query.filter(Organization.ID != id)
 
     return jsonify({'msg': '操作成功', 'code': 200, "data": [org.to_json() for org in orgs]})
-
-@base.route('/base/syorganization!doNotNeedSecurity_comboTree.action', methods=['POST'])
-@login_required
-def syorganization_comboTree():
-    orgs = Organization.query.all()
-
-    return jsonify([org.to_json() for org in orgs])
-
-
-@base.route('/base/syorganization!doNotNeedSecurity_getSyorganizationsTree.action', methods=['POST'])
-@login_required
-def get_syorganizations_tree():
-    orgs = Organization.query.join(User, Organization.users).filter(User.ID == current_user.ID).all()
-    return jsonify([org.to_json() for org in orgs])
-
-@base.route('/base/syorganization!doNotNeedSecurity_getSyorganizationByUserId.action', methods=['POST'])
-@login_required
-def get_syorganization_by_userId():
-    orgs = Organization.query.join(User, Organization.users).filter(User.ID == request.form.get('id')).all()
-    return jsonify([org.to_json() for org in orgs])
 
 @base.route('/system/dept/<string:id>', methods=['GET'])
 @login_required

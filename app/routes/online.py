@@ -37,7 +37,7 @@ def grid_online():
 
     return jsonify({'total': OnLine.query.count(), 'rows': [online.to_json() for online in onlines], 'code': 200})
 
-@base.route('/base/syonline!export.action', methods=['POST'])
+@base.route('/base/syonline/export', methods=['POST'])
 @login_required
 def online_export():
     rows = []
