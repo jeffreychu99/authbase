@@ -16,18 +16,6 @@ from sqlalchemy import asc
 from sqlalchemy import or_
 from flask_login import login_required
 
-@base.route('/base/syrole!doNotNeedSecurity_getRolesTree.action', methods=['POST'])
-@login_required
-def get_roles_tree():
-    roles = Role.query.join(User, Role.users).filter(User.ID == current_user.ID).all()
-    return jsonify([role.to_json() for role in roles])
-
-@base.route('/base/syrole!doNotNeedSecurity_getRoleByUserId.action', methods=['POST'])
-@login_required
-def get_roles_by_userId():
-    roles = Role.query.join(User, Role.users).filter(User.ID == request.form.get('id')).all()
-    return jsonify([role.to_json() for role in roles])
-
 
 @base.route('/system/role/authUser/cancelAll', methods=['PUT'])
 @login_required
