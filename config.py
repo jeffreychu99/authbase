@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
-                              'mysql+mysqlconnector://root:@127.0.0.1/authbase?charset=utf8&auth_plugin=mysql_native_password'
+                              'mysql+mysqlconnector://root:9WDeZvpZr4@127.0.0.1/authbase?charset=utf8&auth_plugin=mysql_native_password'
 
 
 class TestingConfig(Config):

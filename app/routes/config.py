@@ -9,6 +9,7 @@ from sqlalchemy import asc
 from sqlalchemy import desc
 from .. import  db
 from flask_login import login_required
+import flask_excel as excel
 
 @base.route('/system/config/configKey/<configKey>', methods=['GET'])
 @login_required
@@ -94,3 +95,28 @@ def syconfig_delete(ids):
             db.session.delete(config)
 
     return jsonify({'code': 200, 'msg': '操作成功'})
+
+@base.route('/system/config/export', methods=['POST'])
+@login_required
+def config_export():
+    rows = []
+    rows.append(['参数主键', '参数名称', '参数键名', '参数键值', '系统内置', '备注', '创建时间'])
+
+    configs = Config.query.all()
+    for config in configs:
+        row = []
+        row.append(config.config_id)
+        row.append(config.config_name)
+        row.append(config.config_key)
+        row.append(config.config_value)
+        if config.config_type == 'Y':
+            row.append('是')
+        elif config.config_type == 'N':
+            row.append('否')
+        row.append(config.remark)
+        row.append(config.create_time)
+
+        rows.append(row)
+
+    return excel.make_response_from_array(rows, "xlsx",
+                                          file_name="config")

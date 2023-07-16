@@ -5,3 +5,4 @@ Flask-Login==0.6.2
 Flask-moment==1.0.5
 MySQL-connector-python
 Flask-Excel==0.0.7
+pyexcel-xlsx==0.6.0
