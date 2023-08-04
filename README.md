@@ -36,13 +36,16 @@
 
 具体方法参考源码中的docker目录。
 
+镜像基于阿里云容器镜像服务进行自动构建
+
 如何使用
 
-1. docker pull zisokal/authbase:1.1
+1. docker pull registry.cn-hangzhou.aliyuncs.com/zisokal/authbase:1.1
 2. docker run -d -p 5000:5000 -p 80:80 \
 	-e DEV_DATABASE_URI=mysql+mysqlconnector://authbase:123456@127.0.0.1/authbase?charset=utf8 \
 	--name authbase zisokal/authbase:1.1
-3. 打开浏览器访问页面 http://localhost。系统默认的登录名密码为admin/123456
+3. 打开浏览器访问页面 http://localhost   
+   系统默认的登录名密码为admin/123456
 
 
 
