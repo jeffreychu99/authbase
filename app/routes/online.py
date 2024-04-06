@@ -5,9 +5,11 @@ from sqlalchemy import asc
 from sqlalchemy import desc
 import flask_excel as excel
 from flask_login import login_required
+from .. import permission
 
 @base.route('/monitor/logininfor/list', methods=['GET'])
 @login_required
+@permission('monitor:logininfor:list')
 def grid_online():
     filters = []
     if request.args.get('userName'):

@@ -10,6 +10,7 @@ from sqlalchemy import desc
 from .. import  db
 from flask_login import login_required
 import flask_excel as excel
+from .. import permission
 
 @base.route('/system/config/configKey/<configKey>', methods=['GET'])
 @login_required
@@ -21,6 +22,7 @@ def sysconfig_get_value(configKey):
 
 @base.route('/system/config/list', methods=['GET'])
 @login_required
+@permission('system:config:list')
 def sys_config_list():
     filters = []
     if 'configName' in request.args:
@@ -44,6 +46,7 @@ def sys_config_list():
 
 @base.route('/system/config/<id>', methods=['GET'])
 @login_required
+@permission('system:config:query')
 def sysconfig_get_by_id(id):
     config = Config.query.get(id)
 
@@ -51,6 +54,7 @@ def sysconfig_get_by_id(id):
 
 @base.route('/system/config', methods=['POST'])
 @login_required
+@permission('system:config:add')
 def sysconfig_add():
     config = Config()
 
@@ -69,6 +73,7 @@ def sysconfig_add():
 
 @base.route('/system/config', methods=['PUT'])
 @login_required
+@permission('system:config:edit')
 def sysconfig_update():
     config = Config.query.get(request.json['configId'])
 
@@ -87,6 +92,7 @@ def sysconfig_update():
 
 @base.route('/system/config/<string:ids>', methods=['DELETE'])
 @login_required
+@permission('system:config:remove')
 def syconfig_delete(ids):
     idList = ids.split(',')
     for id in idList:
@@ -98,6 +104,7 @@ def syconfig_delete(ids):
 
 @base.route('/system/config/export', methods=['POST'])
 @login_required
+@permission('system:config:export')
 def config_export():
     rows = []
     rows.append(['参数主键', '参数名称', '参数键名', '参数键值', '系统内置', '备注', '创建时间'])

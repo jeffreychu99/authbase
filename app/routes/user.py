@@ -12,9 +12,11 @@ import uuid
 from sqlalchemy import asc, true
 from sqlalchemy import desc
 import flask_excel as excel
+from .. import permission
 
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
+@permission('system:role:edit')
 def grant_user_role():
     id = request.args['userId']
     ids = request.args['roleIds']
@@ -65,6 +67,7 @@ def do_login():
 
 @base.route('/system/user/list', methods=['GET'])
 @login_required
+@permission('system:user:list')
 def user_grid():
     filters = []
     if 'userName' in request.args:
@@ -102,6 +105,7 @@ def syuser_get():
 
 @base.route('/system/user/<id>', methods=['GET'])
 @login_required
+@permission('system:user:query')
 def syuser_getById(id):
     user = User.query.get(id)
 
@@ -117,6 +121,7 @@ def syuser_getById(id):
 
 @base.route('/system/user', methods=['PUT'])
 @login_required
+@permission('system:user:edit')
 def syuser_update():
     id = request.json['userId']
     userName = request.json['userName']
@@ -141,6 +146,7 @@ def syuser_update():
 
 @base.route('/system/user', methods=['POST'])
 @login_required
+@permission('system:user:add')
 def syuser_save():
     if User.query.filter_by(LOGINNAME = request.json['userName']).first():
         return jsonify({'success': False, 'msg': '新建用户失败，用户名已存在！'})
@@ -173,6 +179,7 @@ def syuser_save():
 
 @base.route('/system/user/<id>', methods=['DELETE'])
 @login_required
+@permission('system:user:remove')
 def syuser_delete(id):
     user = User.query.get(id)
     if user:

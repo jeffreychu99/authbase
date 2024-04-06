@@ -8,6 +8,7 @@ from sqlalchemy import asc
 from sqlalchemy import desc
 from .. import  db
 from flask_login import login_required
+from .. import permission
 
 @base.route('/system/dict/data/type/<dictType>', methods=['GET'])
 @login_required
@@ -19,6 +20,7 @@ def sysdictdata_get_by_type(dictType):
 
 @base.route('/system/dict/data/list', methods=['GET'])
 @login_required
+@permission('system:dict:list')
 def sysdict_data_list():
     filters = []
     if 'dictLabel' in request.args:
@@ -39,6 +41,7 @@ def sysdict_data_list():
 
 @base.route('/system/dict/data/<id>', methods=['GET'])
 @login_required
+@permission('system:dict:query')
 def sysdict_data_get_by_id(id):
     data = DictData.query.get(id)
 
@@ -46,6 +49,7 @@ def sysdict_data_get_by_id(id):
 
 @base.route('/system/dict/data', methods=['POST'])
 @login_required
+@permission('system:dict:add')
 def sysdict_data_add():
     dictData = DictData()
 
@@ -65,6 +69,7 @@ def sysdict_data_add():
 
 @base.route('/system/dict/data', methods=['PUT'])
 @login_required
+@permission('system:dict:edit')
 def sysdict_data_update():
     dictData = DictData.query.get(request.json['dictCode'])
 
@@ -86,6 +91,7 @@ def sysdict_data_update():
 
 @base.route('/system/dict/data/<string:ids>', methods=['DELETE'])
 @login_required
+@permission('system:dict:remove')
 def sydata_delete(ids):
     idList = ids.split(',')
     for id in idList:

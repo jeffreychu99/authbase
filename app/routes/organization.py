@@ -10,9 +10,11 @@ from .. import db
 from flask import render_template
 from datetime import datetime
 import uuid
+from .. import permission
 
 @base.route('/system/dept/list', methods=['GET'])
 @login_required
+@permission('system:dept:list')
 def syorganization_treeGrid():
     filters = []
     if 'deptName' in request.args:
@@ -38,6 +40,7 @@ def syorganization_dept_list_exclude(id):
 
 @base.route('/system/dept/<string:id>', methods=['GET'])
 @login_required
+@permission('system:dept:query')
 def syorganization_getById(id):
     org = Organization.query.get(id)
 
@@ -48,6 +51,7 @@ def syorganization_getById(id):
 
 @base.route('/system/dept', methods=['PUT'])
 @login_required
+@permission('system:dept:edit')
 def syorganization_update():
     org = Organization.query.get(request.json['deptId'])
 
@@ -66,6 +70,7 @@ def syorganization_update():
 
 @base.route('/system/dept', methods=['POST'])
 @login_required
+@permission('system:dept:add')
 def syorganization_save():
     org = Organization()
     org.ID = str(uuid.uuid4())

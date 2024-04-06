@@ -15,6 +15,7 @@ from sqlalchemy import desc
 from sqlalchemy import asc
 from sqlalchemy import or_
 from flask_login import login_required
+from .. import permission
 
 
 @base.route('/system/role/authUser/cancelAll', methods=['PUT'])
@@ -48,6 +49,7 @@ def cancel_role():
 
 @base.route('/system/role/list', methods=['GET'])
 @login_required
+@permission('system:role:list')
 def grid():
     filters = []
     if request.args.get('roleName'):
@@ -72,6 +74,7 @@ def grid():
 
 @base.route('/system/role/<string:id>', methods=['GET'])
 @login_required
+@permission('system:role:query')
 def syrole_getById(id):
     role = Role.query.get(id)
 
@@ -82,6 +85,7 @@ def syrole_getById(id):
 
 @base.route('/system/role', methods=['PUT'])
 @login_required
+@permission('system:role:edit')
 def syrole_update():
     role = Role.query.get(request.json['roleId'])
 
@@ -102,6 +106,7 @@ def syrole_update():
 
 @base.route('/system/role', methods=['POST'])
 @login_required
+@permission('system:role:add')
 def syrole_save():
     role = Role()
 
@@ -125,6 +130,7 @@ def syrole_save():
 
 @base.route('/system/role/<string:id>', methods=['DELETE'])
 @login_required
+@permission('system:role:remove')
 def syrole_delete(id):
     role = Role.query.get(id)
     if role:
@@ -194,6 +200,7 @@ def syrole_authUser_selectAll():
 
 @base.route('/system/role/changeStatus', methods=['PUT'])
 @login_required
+@permission('system:role:edit')
 def syrole_status_update():
     role = Role.query.get(request.json['roleId'])
 

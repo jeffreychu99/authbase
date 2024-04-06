@@ -5,9 +5,42 @@ from config import config
 from flask_login import LoginManager
 import flask_excel as excel
 
-
 from flask import json
 from datetime import datetime, date
+
+from flask_login import current_user
+from flask import jsonify
+from functools import wraps
+
+def permission(permission_id):
+    def need_permission(func):
+        @wraps(func)
+        def inner(*args, **kargs):
+            if not current_user.ID:
+                return jsonify(401, {"msg": "认证失败，无法访问系统资源"})
+            else:
+                resources = []
+                resourceTree = []
+
+                resources += [res for org in current_user.organizations for res in org.resources if org.resources]
+                resources += [res for role in current_user.roles for res in role.resources if role.resources]
+                
+                # remove repeat
+                new_dict = dict()
+                for obj in resources:
+                    if obj.ID not in new_dict:
+                        new_dict[obj.ID] = obj
+
+                for resource in new_dict.values():
+                    resourceTree.append(resource.PERMS)
+                if permission_id in resourceTree:
+                    return func(*args, **kargs)
+                else:
+                    return jsonify({'msg': '当前操作没有权限', 'code': 403})
+        return inner
+    return need_permission
+        
+
 
 JSONEncoder = json.JSONEncoder
 

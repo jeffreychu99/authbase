@@ -13,9 +13,11 @@ from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy import asc
 from flask_login import login_required  
+from .. import permission
 
 @base.route('/system/menu/list', methods=['GET'])
 @login_required
+@permission('system:menu:list')
 def syresource_treeGrid():
     filters = []
     if 'menuName' in request.args:
@@ -31,6 +33,7 @@ def syresource_treeGrid():
 
 @base.route('/system/menu/<id>', methods=['GET'])
 @login_required
+@permission('system:menu:query')
 def syresource_getById(id):
     res = Resource.query.get(id)
 
@@ -41,6 +44,7 @@ def syresource_getById(id):
 
 @base.route('/system/menu', methods=['PUT'])
 @login_required
+@permission('system:menu:edit')
 def syresource_update():
     res = Resource.query.get(request.json['menuId'])
 
@@ -61,6 +65,7 @@ def syresource_update():
 
 @base.route('/system/menu', methods=['POST'])
 @login_required
+@permission('system:menu:add')
 def syresource_save():
     res = Resource()
 
@@ -81,6 +86,7 @@ def syresource_save():
 
 @base.route('/system/menu/<id>', methods=['DELETE'])
 @login_required
+@permission('system:menu:remove')
 def syresource_delete(id):
     res = Resource.query.get(id)
     if res:
