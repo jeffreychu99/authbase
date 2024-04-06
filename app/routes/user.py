@@ -291,6 +291,7 @@ def user_export():
 
 @base.route('/system/user/changeStatus', methods=['PUT'])
 @login_required
+@permission('system:user:edit')
 def syuser_status_update():
     user = User.query.get(request.json['userId'])
 
