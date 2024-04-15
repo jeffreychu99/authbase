@@ -82,9 +82,13 @@
 2. pip3 install -r requirements.txt
 3. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码。
 4. python3.x -m flask --app start run [-h 0.0.0.0] [-p 8080]
+   
    说明一下：[]里面是可选项的，如果加上，请去掉中括号：
+
    python3.x -m flask --app start run
+
    或
+   
    python3.x -m flask --app start run -h 0.0.0.0 -p 8080
  
 **讨论群**
