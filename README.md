@@ -12,7 +12,7 @@
 
 >套用Python社区的一句话，人生苦短，我用Python，本开源项目前端界面优美，后端代码精炼，希望能够帮助到有需要的朋友。
 
-**系统已经切换python 3，我的是在python 3.7.0下测试的，理论上Python 3版本应该都是可以运行的。需要Python 2版本的朋友可以checkout到python2分支。**
+**系统已经切换python 3，我的是在python 3.7.0下测试的，仅支持python3.12之前的版本(不包含3.12及其之后的版本)。需要Python 2版本的朋友可以checkout到python2分支。**
 
 
 **完整设计文档**
