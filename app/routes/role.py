@@ -1,7 +1,4 @@
 # coding:utf-8
-import imp
-from operator import or_
-
 from app.models.Organization import Organization
 from ..base import base
 from ..models import Role, Resource, User

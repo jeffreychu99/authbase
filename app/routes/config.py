@@ -1,5 +1,4 @@
 from datetime import datetime
-from distutils.command.config import config
 
 from flask_login import current_user
 from ..base import base
