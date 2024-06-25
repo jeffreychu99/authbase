@@ -84,10 +84,11 @@
 
 后端启动：
 
-1. 导入根目录下db.sql数据库脚本到mysql数据库
-2. pip3 install -r requirements.txt
-3. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码。
-4. python3.x -m flask --app start run [-h 0.0.0.0] [-p 8080]
+1. mysql创建名为authbase的数据库
+2. 导入根目录下db.sql数据库脚本到authbase数据库中
+3. pip3 install -r requirements.txt
+4. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码。
+5. python3.x -m flask --app start run [-h 0.0.0.0] [-p 8080]
    
    说明一下：[]里面是可选项的，如果加上，请去掉中括号：
 
