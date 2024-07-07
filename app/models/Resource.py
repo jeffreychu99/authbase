@@ -31,6 +31,8 @@ class Resource(db.Model, UserMixin):
 
     STATUS = db.Column(db.String(10))
 
+    HIDDEN = False
+
     def get_id(self):
         return str(self.ID)
 
@@ -66,9 +68,9 @@ class Resource(db.Model, UserMixin):
 
     def to_router_json(self):
         router = {
-            'name': self.PATH.capitalize(),
+            'name': self.PATH.capitalize() if self.PATH else '',
             'path': self.PATH,
-            'hidden': False,
+            'hidden': self.HIDDEN,
             'redirect': 'noRedirect',
             'component': self.URL,
             'alwaysShow': True,
