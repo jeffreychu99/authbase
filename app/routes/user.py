@@ -11,6 +11,7 @@ from .. import  db
 import uuid
 from sqlalchemy import asc, true
 from sqlalchemy import desc
+from sqlalchemy import text
 import flask_excel as excel
 from .. import permission
 
@@ -89,8 +90,26 @@ def user_grid():
 
     page = request.args.get('pageNum', 1, type=int)
     rows = request.args.get('pageSize', 10, type=int)
-    pagination = User.query.filter(*filters).order_by(*order_by).paginate(
-        page=page, per_page=rows, error_out=False)
+    if 'deptId' in request.args:
+        # Define a recursive CTE
+        dept_cte = (
+            db.session.query(Organization.ID)
+            .filter(Organization.ID == request.args['deptId'])
+            .cte('dept_tree', recursive=True)
+        )
+        
+        # Recursive part of the CTE
+        dept_cte = dept_cte.union_all(
+            db.session.query(Organization.ID)
+            .join(dept_cte, Organization.SYORGANIZATION_ID == dept_cte.c.ID)
+        )
+        pagination = User.query.join(Organization, User.organizations).join(
+            dept_cte, Organization.ID == dept_cte.c.ID).filter(*filters).params(
+            dept_id=request.args['deptId']).order_by(*order_by).paginate(
+            page=page, per_page=rows, error_out=False)
+    else:
+        pagination = User.query.filter(*filters).order_by(*order_by).paginate(
+            page=page, per_page=rows, error_out=False)
     users = pagination.items
 
     return jsonify({'rows': [user.to_json() for user in users], 'total': pagination.total, 'code': 200, 'msg': '查询成功'})
