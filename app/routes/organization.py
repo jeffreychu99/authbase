@@ -89,3 +89,12 @@ def syorganization_save():
 
     return jsonify({'code': 200, 'msg': '操作成功'})
 
+@base.route('/system/dept/<string:id>', methods=['DELETE'])
+@login_required
+@permission('system:dept:remove')
+def sydept_delete(id):
+    org = Organization.query.get(id)
+    if org:
+        db.session.delete(org)
+
+    return jsonify({'code': 200, 'msg': '操作成功'})
