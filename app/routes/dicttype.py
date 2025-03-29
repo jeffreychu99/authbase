@@ -9,6 +9,7 @@ from sqlalchemy import desc
 from .. import  db
 from flask_login import login_required
 from .. import permission
+import flask_excel as excel
 
 @base.route('/system/dict/type/list', methods=['GET'])
 @login_required
@@ -101,3 +102,24 @@ def sysdict_type_all():
 
     return jsonify({'msg': '操作成功', 'code': 200, 'data': [type.to_json() for type in types]})   
 
+@base.route('/system/dict/type/export', methods=['POST'])
+@login_required
+@permission('system:dict:export')
+def sysdict_type_export():
+    rows = []
+    rows.append(['字典编号', '字典名称', '字典类型', '状态', '备注', '创建时间'])
+
+    types = DictType.query.all()
+    for type in types:
+        row = []
+        row.append(type.dict_id)
+        row.append(type.dict_name)
+        row.append(type.dict_type)
+        row.append(type.status)
+        row.append(type.remark)
+        row.append(type.create_time)
+
+        rows.append(row)
+
+    return excel.make_response_from_array(rows, "xlsx",
+                                          file_name="config")

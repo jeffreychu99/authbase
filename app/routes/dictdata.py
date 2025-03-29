@@ -9,6 +9,7 @@ from sqlalchemy import desc
 from .. import  db
 from flask_login import login_required
 from .. import permission
+import flask_excel as excel
 
 @base.route('/system/dict/data/type/<dictType>', methods=['GET'])
 @login_required
@@ -101,5 +102,27 @@ def sydata_delete(ids):
 
     return jsonify({'code': 200, 'msg': '操作成功'})
 
+@base.route('/system/dict/data/export', methods=['POST'])
+@login_required
+@permission('system:dict:export')
+def sysdict_data_export():
+    dictType = request.form['dictType']
+    rows = []
+    rows.append(['字典编码', '字典标签', '字典键值', '字典排序', '状态', '备注', '创建时间'])
 
+    dataList = DictData.query.filter(DictData.dict_type == dictType).all()
+    for data in dataList:
+        row = []
+        row.append(data.dict_code)
+        row.append(data.dict_label)
+        row.append(data.dict_value)
+        row.append(data.dict_sort)
+        row.append(data.status)
+        row.append(data.remark)
+        row.append(data.create_time)
+
+        rows.append(row)
+
+    return excel.make_response_from_array(rows, "xlsx",
+                                          file_name="config")
  
