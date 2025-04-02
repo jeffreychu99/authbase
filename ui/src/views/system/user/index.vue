@@ -579,7 +579,7 @@ export default {
         this.postOptions = response.posts;
         this.roleOptions = response.roles;
         this.form.postIds = response.postIds;
-        this.form.roleIds = response.roleIds;
+        this.$set(this.form, 'roleIds', response.roleIds);
         this.open = true;
         this.title = "修改用户";
         this.form.password = "";
