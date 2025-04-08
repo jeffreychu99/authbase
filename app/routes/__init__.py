@@ -7,3 +7,4 @@ from . import online
 from . import dictdata
 from . import config
 from . import dicttype
+from . import operationlog

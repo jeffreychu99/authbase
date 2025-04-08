@@ -22,5 +22,5 @@ class OperationLog(db.Model):
             'path': self.PATH,
             'params': self.PARAMS,
             'operator': self.OPERATOR,
-            'createTime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S')
+            'createDateTime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S')
         }   
