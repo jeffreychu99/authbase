@@ -7,7 +7,9 @@
 
 
 -- 导出 authbase 的数据库结构
-CREATE DATABASE IF NOT EXISTS `authbase`;
+CREATE DATABASE IF NOT EXISTS `authbase`
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
 USE `authbase`;
 
 -- 导出  表 authbase.SYONLINE 结构
@@ -422,3 +424,17 @@ INSERT INTO `SYUSER_SYROLE` (`SYUSER_ID`, `SYROLE_ID`) VALUES
 	('0', '0'),
 	('0', '19f00d46-8f1b-45b5-b7b7-6197d7b8cb33'),
 	('0', 'f4e1b151-a171-4705-9154-503a046cb72a');
+
+-- authbase.syoperationlog definition
+
+CREATE TABLE `syoperationlog` (
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `OPERATION_NAME` varchar(100) NOT NULL,
+  `METHOD` varchar(10) DEFAULT NULL,
+  `PATH` varchar(200) NOT NULL,
+  `PARAMS` text,
+  `CREATEDATETIME` datetime DEFAULT NULL,
+  `OPERATOR` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+);
+

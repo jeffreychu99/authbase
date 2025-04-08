@@ -14,6 +14,7 @@ from sqlalchemy import desc
 from sqlalchemy import text
 import flask_excel as excel
 from .. import permission
+from ..operationlog import log_operation
 
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
@@ -208,6 +209,7 @@ def syuser_delete(id):
 
 @base.route('/system/user/profile/updatePwd', methods=['PUT']) 
 @login_required
+@log_operation('修改密码')
 def syuser_update_pwd():
     user = User.query.get(current_user.ID)
 

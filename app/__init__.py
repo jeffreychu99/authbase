@@ -19,7 +19,7 @@ def setup_logger(name):
     logger.setLevel(logging.DEBUG)
 
     # Create a rotating file handler
-    file_handler = RotatingFileHandler('app.log', maxBytes=10*1024*1024, backupCount=5)
+    file_handler = RotatingFileHandler('app.log', encoding='utf-8', maxBytes=10*1024*1024, backupCount=5)
     file_handler.setLevel(logging.INFO)
 
     console_handler = logging.StreamHandler()
