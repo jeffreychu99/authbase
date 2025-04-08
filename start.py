@@ -2,7 +2,13 @@ import os
 from app import create_app, db
 from flask import request, render_template, jsonify
 
+from app import setup_logger
+
+logger = setup_logger(__name__)
+
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
+logger.info('Server started')
 
 @app.errorhandler(404)
 def page_not_found(e):

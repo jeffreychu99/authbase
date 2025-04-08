@@ -11,6 +11,31 @@ from datetime import datetime, date
 from flask_login import current_user
 from flask import jsonify
 from functools import wraps
+import logging
+from logging.handlers import RotatingFileHandler
+
+def setup_logger(name):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+
+    # Create a rotating file handler
+    file_handler = RotatingFileHandler('app.log', maxBytes=10*1024*1024, backupCount=5)
+    file_handler.setLevel(logging.INFO)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+
+    # Create a formatter and set it for the handler
+    formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    # Add the handler to the logger if it hasn't been added yet
+    if not logger.hasHandlers():
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
+
+    return logger
 
 def permission(permission_id):
     def need_permission(func):

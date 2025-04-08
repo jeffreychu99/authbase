@@ -5,6 +5,9 @@ from flask_login import login_user, logout_user, login_required, \
 from flask import g, jsonify
 from ..models import Resource, Organization, ResourceType
 from sqlalchemy import text
+from app import setup_logger
+
+logger = setup_logger(__name__)
 
 def setAccessable(resource, permitedIDList):
     if resource.ID not in permitedIDList:
