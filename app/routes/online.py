@@ -12,8 +12,8 @@ from .. import permission
 @permission('monitor:logininfor:list')
 def grid_online():
     filters = []
-    if request.args.get('userName'):
-        filters.append(OnLine.LOGINNAME.like('%' + request.args.get('userName') + '%'))
+    if request.args.get('loginName'):
+        filters.append(OnLine.LOGINNAME.like('%' + request.args.get('loginName') + '%'))
     if request.args.get('ipaddr'):
         filters.append(OnLine.IP.like('%' + request.args.get('ipaddr') + '%'))
     if request.args.get('type'):
@@ -23,21 +23,21 @@ def grid_online():
         filters.append(OnLine.CREATEDATETIME <  request.args['params[endTime]'])
 
     order_by = []
-    if request.form.get('sort'):
-        if request.form.get('order') == 'asc':
-            order_by.append(asc(getattr(OnLine,request.form.get('sort').upper())))
-        elif request.form.get('order') == 'desc':
-            order_by.append(desc(getattr(OnLine,request.form.get('sort').upper())))
+    if request.args.get('orderByColumn'):
+        if request.args.get('isAsc') == 'ascending':
+            order_by.append(asc(getattr(OnLine,request.args.get('orderByColumn').upper())))
+        elif request.args.get('isAsc') == 'descending':
+            order_by.append(desc(getattr(OnLine,request.args.get('orderByColumn').upper())))
         else:
-            order_by.append(getattr(OnLine,request.form.get('sort').upper()))
+            order_by.append(getattr(OnLine,request.args.get('orderByColumn').upper()))
 
-    page = request.form.get('page', 1, type=int)
-    rows = request.form.get('rows', 10, type=int)
+    page = request.args.get('pageNum', 1, type=int)
+    rows = request.args.get('pageSize', 10, type=int)
     pagination = OnLine.query.filter(*filters).order_by(*order_by).paginate(
         page=page, per_page=rows, error_out=False)
     onlines = pagination.items
 
-    return jsonify({'total': OnLine.query.count(), 'rows': [online.to_json() for online in onlines], 'code': 200})
+    return jsonify({'total': pagination.total, 'rows': [online.to_json() for online in onlines], 'code': 200})
 
 @base.route('/base/syonline/export', methods=['POST'])
 @login_required

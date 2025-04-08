@@ -10,9 +10,9 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="用户名称" prop="userName">
+      <el-form-item label="用户名称" prop="loginName">
         <el-input
-          v-model="queryParams.userName"
+          v-model="queryParams.loginName"
           placeholder="请输入用户名称"
           clearable
           style="width: 240px;"
@@ -89,7 +89,7 @@
     <el-table ref="tables" v-loading="loading" :data="list" @selection-change="handleSelectionChange" :default-sort="defaultSort" @sort-change="handleSortChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="访问编号" align="center" prop="infoId" />
-      <el-table-column label="用户名称" align="center" prop="userName" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
+      <el-table-column label="用户名称" align="center" prop="loginName" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
       <el-table-column label="登录地址" align="center" prop="ipaddr" width="130" :show-overflow-tooltip="true" />
       <!-- <el-table-column label="登录地点" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
       <el-table-column label="浏览器" align="center" prop="browser" :show-overflow-tooltip="true" />
@@ -105,9 +105,9 @@
           <dict-tag :options="dict.type.sys_login_type" :value="scope.row.type"/>
         </template>
       </el-table-column>
-      <el-table-column label="登录日期" align="center" prop="loginTime" sortable="custom" :sort-orders="['descending', 'ascending']" width="180">
+      <el-table-column label="登录日期" align="center" prop="createDateTime" sortable="custom" :sort-orders="['descending', 'ascending']" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.loginTime) }}</span>
+          <span>{{ parseTime(scope.row.createDateTime) }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -145,13 +145,13 @@ export default {
       // 日期范围
       dateRange: [],
       // 默认排序
-      defaultSort: {prop: 'loginTime', order: 'descending'},
+      defaultSort: {prop: 'createDateTime', order: 'descending'},
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
         ipaddr: undefined,
-        userName: undefined,
+        loginName: undefined,
         status: undefined
       }
     };
