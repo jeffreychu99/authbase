@@ -35,3 +35,5 @@ def before():
     #         return jsonify(401, {"msg": "认证失败，无法访问系统资源"})
     #     else:
     #         pass
+if __name__ == '__main__':
+    app.run(debug=True)
