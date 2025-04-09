@@ -38,26 +38,18 @@ CREATE TABLE `SYONLINE` (
 
 LOCK TABLES `SYONLINE` WRITE;
 /*!40000 ALTER TABLE `SYONLINE` DISABLE KEYS */;
-INSERT INTO `SYONLINE` VALUES ('0c69d762-af59-4f12-bd36-ea7b8af99e78','2022-05-22 12:00:43','127.0.0.1','admin','1');
-INSERT INTO `SYONLINE` VALUES ('3b395d9f-0102-4a25-93ce-c278d61e8b0f','2025-03-19 14:28:57','127.0.0.1','admin','0');
-INSERT INTO `SYONLINE` VALUES ('48c530fa-0a73-4c1c-b0de-adec5c4a3447','2023-05-16 19:49:12','127.0.0.1','admin','1');
-INSERT INTO `SYONLINE` VALUES ('575ddacd-03c5-43e5-8acc-fd9f8071e3bb','2025-03-19 14:29:27','127.0.0.1','test123','1');
-INSERT INTO `SYONLINE` VALUES ('5bcd8f65-0123-4be3-ac27-6975e12d9015','2025-04-08 20:22:53','127.0.0.1','admin','1');
-INSERT INTO `SYONLINE` VALUES ('8fcf487e-5735-461a-892d-6c184047c973','2025-04-08 21:12:25','127.0.0.1','admin','1');
-INSERT INTO `SYONLINE` VALUES ('c2a39c82-a77a-49f1-bc46-3a65de80970d','2024-11-10 18:45:23','127.0.0.1','admin','1');
-INSERT INTO `SYONLINE` VALUES ('d1a9efe8-93e5-4c14-b668-d81474f31e93','2025-04-08 21:11:20','127.0.0.1','admin','0');
-INSERT INTO `SYONLINE` VALUES ('d883f49a-a2ed-4ab8-8157-92ec62089c6b','2024-07-03 09:38:22','127.0.0.1','admin','1');
+INSERT INTO `SYONLINE` VALUES ('0c69d762-af59-4f12-bd36-ea7b8af99e78','2022-05-22 12:00:43','127.0.0.1','admin','1'),('3b395d9f-0102-4a25-93ce-c278d61e8b0f','2025-03-19 14:28:57','127.0.0.1','admin','0'),('48c530fa-0a73-4c1c-b0de-adec5c4a3447','2023-05-16 19:49:12','127.0.0.1','admin','1'),('575ddacd-03c5-43e5-8acc-fd9f8071e3bb','2025-03-19 14:29:27','127.0.0.1','test123','1'),('5bcd8f65-0123-4be3-ac27-6975e12d9015','2025-04-08 20:22:53','127.0.0.1','admin','1'),('8fcf487e-5735-461a-892d-6c184047c973','2025-04-08 21:12:25','127.0.0.1','admin','1'),('c2a39c82-a77a-49f1-bc46-3a65de80970d','2024-11-10 18:45:23','127.0.0.1','admin','1'),('d1a9efe8-93e5-4c14-b668-d81474f31e93','2025-04-08 21:11:20','127.0.0.1','admin','0'),('d883f49a-a2ed-4ab8-8157-92ec62089c6b','2024-07-03 09:38:22','127.0.0.1','admin','1');
 /*!40000 ALTER TABLE `SYONLINE` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `syoperationlog`
+-- Table structure for table `SYOPERATIONLOG`
 --
 
-DROP TABLE IF EXISTS `syoperationlog`;
+DROP TABLE IF EXISTS `SYOPERATIONLOG`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `syoperationlog` (
+CREATE TABLE `SYOPERATIONLOG` (
   `ID` bigint NOT NULL AUTO_INCREMENT,
   `OPERATION_NAME` varchar(100) NOT NULL,
   `METHOD` varchar(10) DEFAULT NULL,
@@ -65,37 +57,22 @@ CREATE TABLE `syoperationlog` (
   `PARAMS` text,
   `CREATEDATETIME` datetime DEFAULT NULL,
   `OPERATOR` varchar(100) DEFAULT NULL,
+  `OPERATIONTIME` int DEFAULT NULL,
+  `RESPONSE` text,
+  `EXECEPTION` text,
+  `RESULT` int DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `syoperationlog`
+-- Dumping data for table `SYOPERATIONLOG`
 --
 
-LOCK TABLES `syoperationlog` WRITE;
-/*!40000 ALTER TABLE `syoperationlog` DISABLE KEYS */;
-INSERT INTO `syoperationlog` VALUES (4,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-02 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (5,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (6,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (7,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (8,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (9,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (10,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (11,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (12,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-03 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (13,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (14,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (15,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (16,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (17,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (18,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (19,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (20,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (21,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (22,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-INSERT INTO `syoperationlog` VALUES (23,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-08 21:16:20','admin');
-/*!40000 ALTER TABLE `syoperationlog` ENABLE KEYS */;
+LOCK TABLES `SYOPERATIONLOG` WRITE;
+/*!40000 ALTER TABLE `SYOPERATIONLOG` DISABLE KEYS */;
+INSERT INTO `SYOPERATIONLOG` VALUES (24,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:03:57','admin',0,'<Response 46 bytes [200 OK]>',NULL,1),(25,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:12:29','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(26,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:14:44','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(27,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:22:55','admin',1301,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(28,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:26:18','admin',1303,NULL,'测试异常',0);
+/*!40000 ALTER TABLE `SYOPERATIONLOG` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -131,8 +108,7 @@ CREATE TABLE `SYORGANIZATION` (
 
 LOCK TABLES `SYORGANIZATION` WRITE;
 /*!40000 ALTER TABLE `SYORGANIZATION` DISABLE KEYS */;
-INSERT INTO `SYORGANIZATION` VALUES ('0',NULL,NULL,'2016-11-28 10:34:54','ext-icon-bricks','总部',100,'2016-11-28 10:35:12',NULL,NULL,NULL,NULL,'0');
-INSERT INTO `SYORGANIZATION` VALUES ('5477d9a9-e41e-485f-bb08-697e8facef88',NULL,NULL,'2022-05-22 09:59:33',NULL,'南京分公司',1,'2023-05-16 19:52:10','0','dd','18905189016','ss@ada.com','0');
+INSERT INTO `SYORGANIZATION` VALUES ('0',NULL,NULL,'2016-11-28 10:34:54','ext-icon-bricks','总部',100,'2016-11-28 10:35:12',NULL,NULL,NULL,NULL,'0'),('5477d9a9-e41e-485f-bb08-697e8facef88',NULL,NULL,'2022-05-22 09:59:33',NULL,'南京分公司',1,'2023-05-16 19:52:10','0','dd','18905189016','ss@ada.com','0');
 /*!40000 ALTER TABLE `SYORGANIZATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,56 +175,7 @@ CREATE TABLE `SYRESOURCE` (
 
 LOCK TABLES `SYRESOURCE` WRITE;
 /*!40000 ALTER TABLE `SYRESOURCE` DISABLE KEYS */;
-INSERT INTO `SYRESOURCE` VALUES ('27fda67f-61d1-4fe6-8eea-d796a848ab67','2022-05-28 12:54:39',NULL,'edit','参数设置',6,'','2022-05-28 12:54:39','config','system/config/index','system:config:list','xtgl','3','0');
-INSERT INTO `SYRESOURCE` VALUES ('37ac3cd3-560b-49b3-ae86-96d1963e9db6','2022-05-28 12:55:59',NULL,NULL,'参数修改',3,NULL,'2022-05-28 12:55:59',NULL,NULL,'system:config:edit','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('4621e9f8-e7c6-4c2b-8172-3d8c8ea75371','2022-05-28 12:55:24',NULL,NULL,'参数新增',2,NULL,'2022-05-28 12:55:24',NULL,NULL,'system:config:add','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('71d62d9c-a70a-48a6-9319-8cd161ee72db','2025-04-08 21:10:20',NULL,NULL,'清空操作',5,NULL,'2025-04-08 21:10:20',NULL,NULL,'monitor:operlog:clean','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('726c7c1e-06f8-4c3e-b9e1-95778a430c07','2022-05-28 12:51:16',NULL,NULL,'字典查询',1,NULL,'2022-05-28 12:51:16',NULL,NULL,'system:dict:query','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('830bb1dd-2bb1-4364-bf46-d12421627d45','2025-04-08 21:07:00',NULL,NULL,'查看操作',2,NULL,'2025-04-08 21:09:13',NULL,NULL,'monitor:operlog:query','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('8960e08b-1258-4bf0-94c9-5cd47702f00e','2025-04-08 21:06:08',NULL,NULL,'操作历史',1,NULL,'2025-04-08 21:06:22','',NULL,'monitor:operlog:list','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('b95cae69-6389-4ebc-b613-bee7aac5f730','2022-05-28 12:52:26',NULL,NULL,'字典修改',3,NULL,'2022-05-28 12:52:26',NULL,NULL,'system:dict:edit','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('cc7ff599-a588-40b3-951d-ce9dd2490482','2022-05-28 12:53:26',NULL,NULL,'字典导出',5,NULL,'2022-05-28 12:53:26',NULL,NULL,'system:dict:export','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('cssc','2022-05-28 12:56:23',NULL,NULL,'参数删除',4,NULL,'2022-05-28 12:56:23',NULL,NULL,'system:config:remove','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('d60df8ae-86ee-4879-b9b9-2fe79f146d31','2022-05-28 12:55:02',NULL,NULL,'参数查询',1,NULL,'2022-05-28 12:55:02',NULL,NULL,'system:config:query','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('dd41b52b-272c-49ac-b045-b05392890a8d','2022-05-28 12:56:49',NULL,NULL,'参数导出',5,NULL,'2022-05-28 12:56:49',NULL,NULL,'system:config:export','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('e6d71448-a612-46c2-a9e1-2dfcd3ea745c','2025-04-08 21:03:46',NULL,'log','操作日志',2,NULL,'2025-04-08 21:05:02','operlog','monitor/operlog/index','monitor:operlog:list','xtjk','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('edc3358e-b9c5-462f-8a70-7b1c7d7f2c26','2022-05-28 12:51:53',NULL,NULL,'字典新增',2,NULL,'2022-05-28 12:51:53',NULL,NULL,'system:dict:add','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('eead451f-969e-4374-a1c3-8acd03a7751d','2025-04-08 21:09:43',NULL,NULL,'导出操作',4,NULL,'2025-04-08 21:09:43',NULL,NULL,'monitor:operlog:export','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('eeae423a-62de-4890-9b3c-8aaa19180361','2025-04-08 21:08:58',NULL,NULL,'删除操作',3,NULL,'2025-04-08 21:08:58',NULL,NULL,'monitor:operlog:remove','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','2022-05-28 12:50:37',NULL,'dict','字典管理',5,'','2022-05-28 12:50:37','dict','system/dict/index','system:dict:list','xtgl','3','0');
-INSERT INTO `SYRESOURCE` VALUES ('jgbj','2015-08-25 10:34:53','编辑机构','ext-icon-bullet_wrench','编辑机构',2,'','2022-05-25 00:39:56',NULL,'/base/syorganization!update','system:dept:edit','jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jgck','2015-08-25 10:34:53','查看机构','ext-icon-bullet_wrench','查看机构',4,'','2015-08-25 10:34:53',NULL,'/base/syorganization!getById','system:dept:query','jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jggl','2015-08-25 10:34:53','管理系统中用户的机构','tree','机构管理',4,'','2022-05-25 00:40:04','dept','system/dept/index','system:dept:list','xtgl','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('jglb','2015-08-25 10:34:53','查询机构列表','ext-icon-bullet_wrench','机构列表',0,'','2016-11-28 14:09:52',NULL,'/base/syorganization!treeGrid','system:dept:list','jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jgsc','2015-08-25 10:34:53','删除机构','ext-icon-bullet_wrench','删除机构',3,'','2015-08-25 10:34:53',NULL,'/base/syorganization!delete','system:dept:remove','jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jgsq','2015-08-25 10:34:53','机构授权','ext-icon-bullet_wrench','机构授权',5,'','2015-08-25 10:34:53',NULL,'/base/syorganization!grant',NULL,'jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jgtj','2015-08-25 10:34:53','添加机构','ext-icon-bullet_wrench','添加机构',1,'','2015-08-25 10:34:53',NULL,'/base/syorganization!save','system:dept:add','jggl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jsbj','2015-08-25 10:34:53','编辑角色','ext-icon-bullet_wrench','编辑角色',2,'','2015-08-25 10:34:53',NULL,'/base/syrole!update','system:role:edit','jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jsck','2015-08-25 10:34:53','查看角色','ext-icon-bullet_wrench','查看角色',4,'','2015-08-25 10:34:53',NULL,'/base/syrole!getById','system:role:query','jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jsgl','2015-08-25 10:34:53','管理系统中用户的角色','peoples','角色管理',2,'','2015-08-25 10:34:53','role','system/role/index','system:role:list','xtgl','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('jslb','2015-08-25 10:34:53','查询角色列表','ext-icon-bullet_wrench','角色列表',0,'','2015-08-25 10:34:53',NULL,'/base/syrole!grid','system:role:list','jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jssc','2015-08-25 10:34:53','删除角色','ext-icon-bullet_wrench','删除角色',3,'','2015-08-25 10:34:53',NULL,'/base/syrole!delete','system:role:remove','jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jssq','2015-08-25 10:34:53','角色授权','ext-icon-bullet_wrench','角色授权',5,'','2015-08-25 10:34:53',NULL,'/base/syrole!grant',NULL,'jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('jstj','2015-08-25 10:34:53','添加角色','ext-icon-bullet_wrench','添加角色',1,'','2015-08-25 10:34:53',NULL,'/base/syrole!save','system:role:add','jsgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('online','2015-08-25 10:34:53','监控用户登录、注销','online','登录历史',1,'','2025-04-08 22:05:59','logininfor','monitor/logininfor/index','monitor:logininfor:list','xtjk','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('onlineGrid','2015-08-25 10:34:53','用户登录、注销历史记录列表','ext-icon-bullet_wrench','用户登录历史列表',1,'','2022-05-28 13:16:37',NULL,'/base/syonline!grid','monitor:logininfor:list','online','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('xtgl','2015-08-25 10:34:53','管理系统的资源、角色、机构、用户等信息','system','系统管理',1,'','2023-05-16 20:03:02','/system',NULL,NULL,NULL,'3','0');
-INSERT INTO `SYRESOURCE` VALUES ('xtjk','2015-08-25 10:34:53','监控系统运行情况等信息','monitor','系统监控',2,'','2022-06-10 00:48:47','/system/log','','',NULL,'0','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhbj','2015-08-25 10:34:53','编辑用户','ext-icon-bullet_wrench','编辑用户',2,'','2015-08-25 10:34:53',NULL,'/base/syuser!update','system:user:edit','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhck','2015-08-25 10:34:53','查看用户','ext-icon-bullet_wrench','查看用户',4,'','2015-08-25 10:34:53',NULL,'/base/syuser!getById','system:user:query','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhgl','2015-08-25 10:34:53','管理系统中用户的用户','user','用户管理',1,'','2023-05-16 20:08:40','user','system/user/index','system:user:list','xtgl','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhjg','2015-08-25 10:34:53','编辑用户机构','ext-icon-bullet_wrench','用户机构',6,'','2015-08-25 10:34:53',NULL,'/base/syuser!grantOrganization','system:dept:edit','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhjs','2015-08-25 10:34:53','编辑用户角色','ext-icon-bullet_wrench','用户角色',5,'','2015-08-25 10:34:53',NULL,'/base/syuser!grantRole','system:role:edit','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhlb','2015-08-25 10:34:53','查询用户列表','ext-icon-bullet_wrench','用户列表',0,'','2015-08-25 10:34:53',NULL,'/base/syuser!grid','system:user:list','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhsc','2015-08-25 10:34:53','删除用户','ext-icon-bullet_wrench','删除用户',3,'','2015-08-25 10:34:53',NULL,'/base/syuser!delete','system:user:remove','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('yhtj','2015-08-25 10:34:53','添加用户','ext-icon-bullet_wrench','添加用户',1,'','2015-08-25 10:34:53',NULL,'/base/syuser!save','system:user:add','yhgl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zdsc','2022-05-28 12:52:58',NULL,NULL,'字典删除',4,NULL,'2022-05-28 12:52:58',NULL,NULL,'system:dict:remove','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zybj','2015-08-25 10:34:53','编辑资源','ext-icon-bullet_wrench','编辑资源',2,'','2015-08-25 10:34:53',NULL,'/base/syresource!update','system:menu:edit','zygl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zyck','2015-08-25 10:34:53','查看资源','ext-icon-bullet_wrench','查看资源',4,'','2015-08-25 10:34:53',NULL,'/base/syresource!getById','system:menu:query','zygl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zygl','2015-08-25 10:34:53','管理系统的资源','tree-table','资源管理',3,'','2022-05-25 00:48:32','menu','system/menu/index','system:menu:list','xtgl','0','0');
-INSERT INTO `SYRESOURCE` VALUES ('zylb','2015-08-25 10:34:53','查询资源','ext-icon-bullet_wrench','资源列表',0,'','2015-08-25 10:34:53',NULL,'/base/syresource!treeGrid','system:menu:query','zygl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zysc','2015-08-25 10:34:53','删除资源','ext-icon-bullet_wrench','删除资源',3,'','2015-08-25 10:34:53',NULL,'/base/syresource!delete','system:menu:remove','zygl','1','0');
-INSERT INTO `SYRESOURCE` VALUES ('zytj','2015-08-25 10:34:53','添加资源','ext-icon-bullet_wrench','添加资源',1,'','2015-08-25 10:34:53',NULL,'/base/syresource!save','system:menu:add','zygl','1','0');
+INSERT INTO `SYRESOURCE` VALUES ('27fda67f-61d1-4fe6-8eea-d796a848ab67','2022-05-28 12:54:39',NULL,'edit','参数设置',6,'','2022-05-28 12:54:39','config','system/config/index','system:config:list','xtgl','3','0'),('37ac3cd3-560b-49b3-ae86-96d1963e9db6','2022-05-28 12:55:59',NULL,NULL,'参数修改',3,NULL,'2022-05-28 12:55:59',NULL,NULL,'system:config:edit','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0'),('4621e9f8-e7c6-4c2b-8172-3d8c8ea75371','2022-05-28 12:55:24',NULL,NULL,'参数新增',2,NULL,'2022-05-28 12:55:24',NULL,NULL,'system:config:add','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0'),('71d62d9c-a70a-48a6-9319-8cd161ee72db','2025-04-08 21:10:20',NULL,NULL,'清空操作',5,NULL,'2025-04-08 21:10:20',NULL,NULL,'monitor:operlog:clean','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0'),('726c7c1e-06f8-4c3e-b9e1-95778a430c07','2022-05-28 12:51:16',NULL,NULL,'字典查询',1,NULL,'2022-05-28 12:51:16',NULL,NULL,'system:dict:query','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0'),('830bb1dd-2bb1-4364-bf46-d12421627d45','2025-04-08 21:07:00',NULL,NULL,'查看操作',2,NULL,'2025-04-08 21:09:13',NULL,NULL,'monitor:operlog:query','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0'),('8960e08b-1258-4bf0-94c9-5cd47702f00e','2025-04-08 21:06:08',NULL,NULL,'操作历史',1,NULL,'2025-04-08 21:06:22','',NULL,'monitor:operlog:list','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0'),('b95cae69-6389-4ebc-b613-bee7aac5f730','2022-05-28 12:52:26',NULL,NULL,'字典修改',3,NULL,'2022-05-28 12:52:26',NULL,NULL,'system:dict:edit','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0'),('cc7ff599-a588-40b3-951d-ce9dd2490482','2022-05-28 12:53:26',NULL,NULL,'字典导出',5,NULL,'2022-05-28 12:53:26',NULL,NULL,'system:dict:export','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0'),('cssc','2022-05-28 12:56:23',NULL,NULL,'参数删除',4,NULL,'2022-05-28 12:56:23',NULL,NULL,'system:config:remove','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0'),('d60df8ae-86ee-4879-b9b9-2fe79f146d31','2022-05-28 12:55:02',NULL,NULL,'参数查询',1,NULL,'2022-05-28 12:55:02',NULL,NULL,'system:config:query','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0'),('dd41b52b-272c-49ac-b045-b05392890a8d','2022-05-28 12:56:49',NULL,NULL,'参数导出',5,NULL,'2022-05-28 12:56:49',NULL,NULL,'system:config:export','27fda67f-61d1-4fe6-8eea-d796a848ab67','1','0'),('e6d71448-a612-46c2-a9e1-2dfcd3ea745c','2025-04-08 21:03:46',NULL,'log','操作日志',2,NULL,'2025-04-08 21:05:02','operlog','monitor/operlog/index','monitor:operlog:list','xtjk','0','0'),('edc3358e-b9c5-462f-8a70-7b1c7d7f2c26','2022-05-28 12:51:53',NULL,NULL,'字典新增',2,NULL,'2022-05-28 12:51:53',NULL,NULL,'system:dict:add','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0'),('eead451f-969e-4374-a1c3-8acd03a7751d','2025-04-08 21:09:43',NULL,NULL,'导出操作',4,NULL,'2025-04-08 21:09:43',NULL,NULL,'monitor:operlog:export','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0'),('eeae423a-62de-4890-9b3c-8aaa19180361','2025-04-08 21:08:58',NULL,NULL,'删除操作',3,NULL,'2025-04-08 21:08:58',NULL,NULL,'monitor:operlog:remove','e6d71448-a612-46c2-a9e1-2dfcd3ea745c','1','0'),('ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','2022-05-28 12:50:37',NULL,'dict','字典管理',5,'','2022-05-28 12:50:37','dict','system/dict/index','system:dict:list','xtgl','3','0'),('jgbj','2015-08-25 10:34:53','编辑机构','ext-icon-bullet_wrench','编辑机构',2,'','2022-05-25 00:39:56',NULL,'/base/syorganization!update','system:dept:edit','jggl','1','0'),('jgck','2015-08-25 10:34:53','查看机构','ext-icon-bullet_wrench','查看机构',4,'','2015-08-25 10:34:53',NULL,'/base/syorganization!getById','system:dept:query','jggl','1','0'),('jggl','2015-08-25 10:34:53','管理系统中用户的机构','tree','机构管理',4,'','2022-05-25 00:40:04','dept','system/dept/index','system:dept:list','xtgl','0','0'),('jglb','2015-08-25 10:34:53','查询机构列表','ext-icon-bullet_wrench','机构列表',0,'','2016-11-28 14:09:52',NULL,'/base/syorganization!treeGrid','system:dept:list','jggl','1','0'),('jgsc','2015-08-25 10:34:53','删除机构','ext-icon-bullet_wrench','删除机构',3,'','2015-08-25 10:34:53',NULL,'/base/syorganization!delete','system:dept:remove','jggl','1','0'),('jgsq','2015-08-25 10:34:53','机构授权','ext-icon-bullet_wrench','机构授权',5,'','2015-08-25 10:34:53',NULL,'/base/syorganization!grant',NULL,'jggl','1','0'),('jgtj','2015-08-25 10:34:53','添加机构','ext-icon-bullet_wrench','添加机构',1,'','2015-08-25 10:34:53',NULL,'/base/syorganization!save','system:dept:add','jggl','1','0'),('jsbj','2015-08-25 10:34:53','编辑角色','ext-icon-bullet_wrench','编辑角色',2,'','2015-08-25 10:34:53',NULL,'/base/syrole!update','system:role:edit','jsgl','1','0'),('jsck','2015-08-25 10:34:53','查看角色','ext-icon-bullet_wrench','查看角色',4,'','2015-08-25 10:34:53',NULL,'/base/syrole!getById','system:role:query','jsgl','1','0'),('jsgl','2015-08-25 10:34:53','管理系统中用户的角色','peoples','角色管理',2,'','2015-08-25 10:34:53','role','system/role/index','system:role:list','xtgl','0','0'),('jslb','2015-08-25 10:34:53','查询角色列表','ext-icon-bullet_wrench','角色列表',0,'','2015-08-25 10:34:53',NULL,'/base/syrole!grid','system:role:list','jsgl','1','0'),('jssc','2015-08-25 10:34:53','删除角色','ext-icon-bullet_wrench','删除角色',3,'','2015-08-25 10:34:53',NULL,'/base/syrole!delete','system:role:remove','jsgl','1','0'),('jssq','2015-08-25 10:34:53','角色授权','ext-icon-bullet_wrench','角色授权',5,'','2015-08-25 10:34:53',NULL,'/base/syrole!grant',NULL,'jsgl','1','0'),('jstj','2015-08-25 10:34:53','添加角色','ext-icon-bullet_wrench','添加角色',1,'','2015-08-25 10:34:53',NULL,'/base/syrole!save','system:role:add','jsgl','1','0'),('online','2015-08-25 10:34:53','监控用户登录、注销','online','登录历史',1,'','2025-04-08 22:05:59','logininfor','monitor/logininfor/index','monitor:logininfor:list','xtjk','0','0'),('onlineGrid','2015-08-25 10:34:53','用户登录、注销历史记录列表','ext-icon-bullet_wrench','用户登录历史列表',1,'','2022-05-28 13:16:37',NULL,'/base/syonline!grid','monitor:logininfor:list','online','1','0'),('xtgl','2015-08-25 10:34:53','管理系统的资源、角色、机构、用户等信息','system','系统管理',1,'','2023-05-16 20:03:02','/system',NULL,NULL,NULL,'3','0'),('xtjk','2015-08-25 10:34:53','监控系统运行情况等信息','monitor','系统监控',2,'','2022-06-10 00:48:47','/system/log','','',NULL,'0','0'),('yhbj','2015-08-25 10:34:53','编辑用户','ext-icon-bullet_wrench','编辑用户',2,'','2015-08-25 10:34:53',NULL,'/base/syuser!update','system:user:edit','yhgl','1','0'),('yhck','2015-08-25 10:34:53','查看用户','ext-icon-bullet_wrench','查看用户',4,'','2015-08-25 10:34:53',NULL,'/base/syuser!getById','system:user:query','yhgl','1','0'),('yhgl','2015-08-25 10:34:53','管理系统中用户的用户','user','用户管理',1,'','2023-05-16 20:08:40','user','system/user/index','system:user:list','xtgl','0','0'),('yhjg','2015-08-25 10:34:53','编辑用户机构','ext-icon-bullet_wrench','用户机构',6,'','2015-08-25 10:34:53',NULL,'/base/syuser!grantOrganization','system:dept:edit','yhgl','1','0'),('yhjs','2015-08-25 10:34:53','编辑用户角色','ext-icon-bullet_wrench','用户角色',5,'','2015-08-25 10:34:53',NULL,'/base/syuser!grantRole','system:role:edit','yhgl','1','0'),('yhlb','2015-08-25 10:34:53','查询用户列表','ext-icon-bullet_wrench','用户列表',0,'','2015-08-25 10:34:53',NULL,'/base/syuser!grid','system:user:list','yhgl','1','0'),('yhsc','2015-08-25 10:34:53','删除用户','ext-icon-bullet_wrench','删除用户',3,'','2015-08-25 10:34:53',NULL,'/base/syuser!delete','system:user:remove','yhgl','1','0'),('yhtj','2015-08-25 10:34:53','添加用户','ext-icon-bullet_wrench','添加用户',1,'','2015-08-25 10:34:53',NULL,'/base/syuser!save','system:user:add','yhgl','1','0'),('zdsc','2022-05-28 12:52:58',NULL,NULL,'字典删除',4,NULL,'2022-05-28 12:52:58',NULL,NULL,'system:dict:remove','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5','1','0'),('zybj','2015-08-25 10:34:53','编辑资源','ext-icon-bullet_wrench','编辑资源',2,'','2015-08-25 10:34:53',NULL,'/base/syresource!update','system:menu:edit','zygl','1','0'),('zyck','2015-08-25 10:34:53','查看资源','ext-icon-bullet_wrench','查看资源',4,'','2015-08-25 10:34:53',NULL,'/base/syresource!getById','system:menu:query','zygl','1','0'),('zygl','2015-08-25 10:34:53','管理系统的资源','tree-table','资源管理',3,'','2022-05-25 00:48:32','menu','system/menu/index','system:menu:list','xtgl','0','0'),('zylb','2015-08-25 10:34:53','查询资源','ext-icon-bullet_wrench','资源列表',0,'','2015-08-25 10:34:53',NULL,'/base/syresource!treeGrid','system:menu:query','zygl','1','0'),('zysc','2015-08-25 10:34:53','删除资源','ext-icon-bullet_wrench','删除资源',3,'','2015-08-25 10:34:53',NULL,'/base/syresource!delete','system:menu:remove','zygl','1','0'),('zytj','2015-08-25 10:34:53','添加资源','ext-icon-bullet_wrench','添加资源',1,'','2015-08-25 10:34:53',NULL,'/base/syresource!save','system:menu:add','zygl','1','0');
 /*!40000 ALTER TABLE `SYRESOURCE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,9 +202,7 @@ CREATE TABLE `SYRESOURCETYPE` (
 
 LOCK TABLES `SYRESOURCETYPE` WRITE;
 /*!40000 ALTER TABLE `SYRESOURCETYPE` DISABLE KEYS */;
-INSERT INTO `SYRESOURCETYPE` VALUES ('0','2015-08-25 10:34:53','菜单类型会显示在系统首页左侧菜单中','菜单','2015-08-25 10:34:53');
-INSERT INTO `SYRESOURCETYPE` VALUES ('1','2015-08-25 10:34:53','功能类型不会显示在系统首页左侧菜单中','功能','2015-08-25 10:34:53');
-INSERT INTO `SYRESOURCETYPE` VALUES ('3','2022-05-15 10:27:08',NULL,'目录','2022-05-15 10:27:18');
+INSERT INTO `SYRESOURCETYPE` VALUES ('0','2015-08-25 10:34:53','菜单类型会显示在系统首页左侧菜单中','菜单','2015-08-25 10:34:53'),('1','2015-08-25 10:34:53','功能类型不会显示在系统首页左侧菜单中','功能','2015-08-25 10:34:53'),('3','2022-05-15 10:27:08',NULL,'目录','2022-05-15 10:27:18');
 /*!40000 ALTER TABLE `SYRESOURCETYPE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,9 +234,7 @@ CREATE TABLE `SYROLE` (
 
 LOCK TABLES `SYROLE` WRITE;
 /*!40000 ALTER TABLE `SYROLE` DISABLE KEYS */;
-INSERT INTO `SYROLE` VALUES ('0','2015-08-25 10:34:53','拥有系统所有权限',NULL,'超管',0,'2025-04-08 21:11:14','superadmin','1','0');
-INSERT INTO `SYROLE` VALUES ('19f00d46-8f1b-45b5-b7b7-6197d7b8cb33','2016-11-28 14:24:00',NULL,NULL,'管理员',100,'2022-06-10 00:27:41','admin','1','0');
-INSERT INTO `SYROLE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','2022-05-29 13:29:38',NULL,NULL,'只读用户',1,'2022-06-10 00:13:55','readonly','2','0');
+INSERT INTO `SYROLE` VALUES ('0','2015-08-25 10:34:53','拥有系统所有权限',NULL,'超管',0,'2025-04-08 21:11:14','superadmin','1','0'),('19f00d46-8f1b-45b5-b7b7-6197d7b8cb33','2016-11-28 14:24:00',NULL,NULL,'管理员',100,'2022-06-10 00:27:41','admin','1','0'),('f4e1b151-a171-4705-9154-503a046cb72a','2022-05-29 13:29:38',NULL,NULL,'只读用户',1,'2022-06-10 00:13:55','readonly','2','0');
 /*!40000 ALTER TABLE `SYROLE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,69 +290,7 @@ CREATE TABLE `SYROLE_SYRESOURCE` (
 
 LOCK TABLES `SYROLE_SYRESOURCE` WRITE;
 /*!40000 ALTER TABLE `SYROLE_SYRESOURCE` DISABLE KEYS */;
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','27fda67f-61d1-4fe6-8eea-d796a848ab67');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','27fda67f-61d1-4fe6-8eea-d796a848ab67');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','37ac3cd3-560b-49b3-ae86-96d1963e9db6');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','4621e9f8-e7c6-4c2b-8172-3d8c8ea75371');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','71d62d9c-a70a-48a6-9319-8cd161ee72db');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','726c7c1e-06f8-4c3e-b9e1-95778a430c07');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','726c7c1e-06f8-4c3e-b9e1-95778a430c07');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','830bb1dd-2bb1-4364-bf46-d12421627d45');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','8960e08b-1258-4bf0-94c9-5cd47702f00e');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','b95cae69-6389-4ebc-b613-bee7aac5f730');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','cc7ff599-a588-40b3-951d-ce9dd2490482');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','cssc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','d60df8ae-86ee-4879-b9b9-2fe79f146d31');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','d60df8ae-86ee-4879-b9b9-2fe79f146d31');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','dd41b52b-272c-49ac-b045-b05392890a8d');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','e6d71448-a612-46c2-a9e1-2dfcd3ea745c');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','edc3358e-b9c5-462f-8a70-7b1c7d7f2c26');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','eead451f-969e-4374-a1c3-8acd03a7751d');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','eeae423a-62de-4890-9b3c-8aaa19180361');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jgbj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jgck');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jggl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','jggl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jglb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','jglb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jgsc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jgsq');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jgtj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jsbj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jsck');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jsgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','jsgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jslb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','jslb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jssc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jssq');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','jstj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','online');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','onlineGrid');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','xtgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','xtgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','xtjk');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhbj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhck');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','yhgl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhjg');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhjs');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhlb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','yhlb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhsc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','yhtj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zdsc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zybj');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zyck');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zygl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','zygl');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zylb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('f4e1b151-a171-4705-9154-503a046cb72a','zylb');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zysc');
-INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','zytj');
+INSERT INTO `SYROLE_SYRESOURCE` VALUES ('0','27fda67f-61d1-4fe6-8eea-d796a848ab67'),('f4e1b151-a171-4705-9154-503a046cb72a','27fda67f-61d1-4fe6-8eea-d796a848ab67'),('0','37ac3cd3-560b-49b3-ae86-96d1963e9db6'),('0','4621e9f8-e7c6-4c2b-8172-3d8c8ea75371'),('0','71d62d9c-a70a-48a6-9319-8cd161ee72db'),('0','726c7c1e-06f8-4c3e-b9e1-95778a430c07'),('f4e1b151-a171-4705-9154-503a046cb72a','726c7c1e-06f8-4c3e-b9e1-95778a430c07'),('0','830bb1dd-2bb1-4364-bf46-d12421627d45'),('0','8960e08b-1258-4bf0-94c9-5cd47702f00e'),('0','b95cae69-6389-4ebc-b613-bee7aac5f730'),('0','cc7ff599-a588-40b3-951d-ce9dd2490482'),('0','cssc'),('0','d60df8ae-86ee-4879-b9b9-2fe79f146d31'),('f4e1b151-a171-4705-9154-503a046cb72a','d60df8ae-86ee-4879-b9b9-2fe79f146d31'),('0','dd41b52b-272c-49ac-b045-b05392890a8d'),('0','e6d71448-a612-46c2-a9e1-2dfcd3ea745c'),('0','edc3358e-b9c5-462f-8a70-7b1c7d7f2c26'),('0','eead451f-969e-4374-a1c3-8acd03a7751d'),('0','eeae423a-62de-4890-9b3c-8aaa19180361'),('0','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5'),('f4e1b151-a171-4705-9154-503a046cb72a','ffb8cf26-1049-43ee-9dd5-16e5742ce9d5'),('0','jgbj'),('0','jgck'),('0','jggl'),('f4e1b151-a171-4705-9154-503a046cb72a','jggl'),('0','jglb'),('f4e1b151-a171-4705-9154-503a046cb72a','jglb'),('0','jgsc'),('0','jgsq'),('0','jgtj'),('0','jsbj'),('0','jsck'),('0','jsgl'),('f4e1b151-a171-4705-9154-503a046cb72a','jsgl'),('0','jslb'),('f4e1b151-a171-4705-9154-503a046cb72a','jslb'),('0','jssc'),('0','jssq'),('0','jstj'),('0','online'),('0','onlineGrid'),('0','xtgl'),('f4e1b151-a171-4705-9154-503a046cb72a','xtgl'),('0','xtjk'),('0','yhbj'),('0','yhck'),('0','yhgl'),('f4e1b151-a171-4705-9154-503a046cb72a','yhgl'),('0','yhjg'),('0','yhjs'),('0','yhlb'),('f4e1b151-a171-4705-9154-503a046cb72a','yhlb'),('0','yhsc'),('0','yhtj'),('0','zdsc'),('0','zybj'),('0','zyck'),('0','zygl'),('f4e1b151-a171-4705-9154-503a046cb72a','zygl'),('0','zylb'),('f4e1b151-a171-4705-9154-503a046cb72a','zylb'),('0','zysc'),('0','zytj');
 /*!40000 ALTER TABLE `SYROLE_SYRESOURCE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,11 +322,7 @@ CREATE TABLE `SYS_CONFIG` (
 
 LOCK TABLES `SYS_CONFIG` WRITE;
 /*!40000 ALTER TABLE `SYS_CONFIG` DISABLE KEYS */;
-INSERT INTO `SYS_CONFIG` VALUES (1,'主框架页-默认皮肤样式名称','sys.index.skinName','skin-blue','Y','admin','2022-05-14 14:04:21','',NULL,'蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
-INSERT INTO `SYS_CONFIG` VALUES (2,'用户管理-账号初始密码','sys.user.initPassword','123456','Y','admin','2022-05-14 14:04:21','',NULL,'初始化密码 123456');
-INSERT INTO `SYS_CONFIG` VALUES (3,'主框架页-侧边栏主题','sys.index.sideTheme','theme-dark','Y','admin','2022-05-14 14:04:21','',NULL,'深色主题theme-dark，浅色主题theme-light');
-INSERT INTO `SYS_CONFIG` VALUES (4,'账号自助-验证码开关','sys.account.captchaOnOff','true','Y','admin','2022-05-14 14:04:21','',NULL,'是否开启验证码功能（true开启，false关闭）');
-INSERT INTO `SYS_CONFIG` VALUES (5,'账号自助-是否开启用户注册功能','sys.account.registerUser','false','Y','admin','2022-05-14 14:04:21','',NULL,'是否开启注册用户功能（true开启，false关闭）');
+INSERT INTO `SYS_CONFIG` VALUES (1,'主框架页-默认皮肤样式名称','sys.index.skinName','skin-blue','Y','admin','2022-05-14 14:04:21','',NULL,'蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow'),(2,'用户管理-账号初始密码','sys.user.initPassword','123456','Y','admin','2022-05-14 14:04:21','',NULL,'初始化密码 123456'),(3,'主框架页-侧边栏主题','sys.index.sideTheme','theme-dark','Y','admin','2022-05-14 14:04:21','',NULL,'深色主题theme-dark，浅色主题theme-light'),(4,'账号自助-验证码开关','sys.account.captchaOnOff','true','Y','admin','2022-05-14 14:04:21','',NULL,'是否开启验证码功能（true开启，false关闭）'),(5,'账号自助-是否开启用户注册功能','sys.account.registerUser','false','Y','admin','2022-05-14 14:04:21','',NULL,'是否开启注册用户功能（true开启，false关闭）');
 /*!40000 ALTER TABLE `SYS_CONFIG` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,36 +360,7 @@ CREATE TABLE `SYS_DICT_DATA` (
 
 LOCK TABLES `SYS_DICT_DATA` WRITE;
 /*!40000 ALTER TABLE `SYS_DICT_DATA` DISABLE KEYS */;
-INSERT INTO `SYS_DICT_DATA` VALUES (1,1,'男','0','sys_user_sex','','','Y','0','admin','2022-05-14 14:04:20','',NULL,'性别男');
-INSERT INTO `SYS_DICT_DATA` VALUES (2,2,'女','1','sys_user_sex','','','N','0','admin','2022-05-14 14:04:20','',NULL,'性别女');
-INSERT INTO `SYS_DICT_DATA` VALUES (3,3,'未知','2','sys_user_sex','','','N','0','admin','2022-05-14 14:04:20','',NULL,'性别未知');
-INSERT INTO `SYS_DICT_DATA` VALUES (4,1,'显示','0','sys_show_hide','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'显示菜单');
-INSERT INTO `SYS_DICT_DATA` VALUES (5,2,'隐藏','1','sys_show_hide','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'隐藏菜单');
-INSERT INTO `SYS_DICT_DATA` VALUES (6,1,'正常','0','sys_normal_disable','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (7,2,'停用','1','sys_normal_disable','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'停用状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (8,1,'正常','0','sys_job_status','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (9,2,'暂停','1','sys_job_status','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'停用状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (10,1,'默认','DEFAULT','sys_job_group','','','Y','0','admin','2022-05-14 14:04:20','',NULL,'默认分组');
-INSERT INTO `SYS_DICT_DATA` VALUES (11,2,'系统','SYSTEM','sys_job_group','','','N','0','admin','2022-05-14 14:04:20','',NULL,'系统分组');
-INSERT INTO `SYS_DICT_DATA` VALUES (12,1,'是','Y','sys_yes_no','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'系统默认是');
-INSERT INTO `SYS_DICT_DATA` VALUES (13,2,'否','N','sys_yes_no','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'系统默认否');
-INSERT INTO `SYS_DICT_DATA` VALUES (14,1,'通知','1','sys_notice_type','','warning','Y','0','admin','2022-05-14 14:04:20','',NULL,'通知');
-INSERT INTO `SYS_DICT_DATA` VALUES (15,2,'公告','2','sys_notice_type','','success','N','0','admin','2022-05-14 14:04:20','',NULL,'公告');
-INSERT INTO `SYS_DICT_DATA` VALUES (16,1,'正常','0','sys_notice_status','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (17,2,'关闭','1','sys_notice_status','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'关闭状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (18,1,'新增','1','sys_oper_type','','info','N','0','admin','2022-05-14 14:04:21','',NULL,'新增操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (19,2,'修改','2','sys_oper_type','','info','N','0','admin','2022-05-14 14:04:21','',NULL,'修改操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (20,3,'删除','3','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'删除操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (21,4,'授权','4','sys_oper_type','','primary','N','0','admin','2022-05-14 14:04:21','',NULL,'授权操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (22,5,'导出','5','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'导出操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (23,6,'导入','6','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'导入操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (24,7,'强退','7','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'强退操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (25,8,'生成代码','8','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'生成操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (26,9,'清空数据','9','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'清空操作');
-INSERT INTO `SYS_DICT_DATA` VALUES (27,1,'成功','0','sys_common_status','','primary','N','0','admin','2022-05-14 14:04:21','',NULL,'正常状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (28,2,'失败','1','sys_common_status','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'停用状态');
-INSERT INTO `SYS_DICT_DATA` VALUES (100,0,'登录','1','sys_login_type',NULL,'default',NULL,'0','admin','2022-06-10 00:29:31','admin','2022-06-10 00:29:58',NULL);
-INSERT INTO `SYS_DICT_DATA` VALUES (101,1,'注销','0','sys_login_type',NULL,'default',NULL,'0','admin','2022-06-10 00:29:48',NULL,'2022-06-10 00:29:48',NULL);
+INSERT INTO `SYS_DICT_DATA` VALUES (1,1,'男','0','sys_user_sex','','','Y','0','admin','2022-05-14 14:04:20','',NULL,'性别男'),(2,2,'女','1','sys_user_sex','','','N','0','admin','2022-05-14 14:04:20','',NULL,'性别女'),(3,3,'未知','2','sys_user_sex','','','N','0','admin','2022-05-14 14:04:20','',NULL,'性别未知'),(4,1,'显示','0','sys_show_hide','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'显示菜单'),(5,2,'隐藏','1','sys_show_hide','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'隐藏菜单'),(6,1,'正常','0','sys_normal_disable','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态'),(7,2,'停用','1','sys_normal_disable','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'停用状态'),(8,1,'正常','0','sys_job_status','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态'),(9,2,'暂停','1','sys_job_status','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'停用状态'),(10,1,'默认','DEFAULT','sys_job_group','','','Y','0','admin','2022-05-14 14:04:20','',NULL,'默认分组'),(11,2,'系统','SYSTEM','sys_job_group','','','N','0','admin','2022-05-14 14:04:20','',NULL,'系统分组'),(12,1,'是','Y','sys_yes_no','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'系统默认是'),(13,2,'否','N','sys_yes_no','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'系统默认否'),(14,1,'通知','1','sys_notice_type','','warning','Y','0','admin','2022-05-14 14:04:20','',NULL,'通知'),(15,2,'公告','2','sys_notice_type','','success','N','0','admin','2022-05-14 14:04:20','',NULL,'公告'),(16,1,'正常','0','sys_notice_status','','primary','Y','0','admin','2022-05-14 14:04:20','',NULL,'正常状态'),(17,2,'关闭','1','sys_notice_status','','danger','N','0','admin','2022-05-14 14:04:20','',NULL,'关闭状态'),(18,1,'新增','1','sys_oper_type','','info','N','0','admin','2022-05-14 14:04:21','',NULL,'新增操作'),(19,2,'修改','2','sys_oper_type','','info','N','0','admin','2022-05-14 14:04:21','',NULL,'修改操作'),(20,3,'删除','3','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'删除操作'),(21,4,'授权','4','sys_oper_type','','primary','N','0','admin','2022-05-14 14:04:21','',NULL,'授权操作'),(22,5,'导出','5','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'导出操作'),(23,6,'导入','6','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'导入操作'),(24,7,'强退','7','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'强退操作'),(25,8,'生成代码','8','sys_oper_type','','warning','N','0','admin','2022-05-14 14:04:21','',NULL,'生成操作'),(26,9,'清空数据','9','sys_oper_type','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'清空操作'),(27,1,'成功','0','sys_common_status','','primary','N','0','admin','2022-05-14 14:04:21','',NULL,'正常状态'),(28,2,'失败','1','sys_common_status','','danger','N','0','admin','2022-05-14 14:04:21','',NULL,'停用状态'),(100,0,'登录','1','sys_login_type',NULL,'default',NULL,'0','admin','2022-06-10 00:29:31','admin','2022-06-10 00:29:58',NULL),(101,1,'注销','0','sys_login_type',NULL,'default',NULL,'0','admin','2022-06-10 00:29:48',NULL,'2022-06-10 00:29:48',NULL);
 /*!40000 ALTER TABLE `SYS_DICT_DATA` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -564,17 +392,7 @@ CREATE TABLE `SYS_DICT_TYPE` (
 
 LOCK TABLES `SYS_DICT_TYPE` WRITE;
 /*!40000 ALTER TABLE `SYS_DICT_TYPE` DISABLE KEYS */;
-INSERT INTO `SYS_DICT_TYPE` VALUES (1,'用户性别','sys_user_sex','0','admin','2022-05-14 14:04:20','',NULL,'用户性别列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (2,'菜单状态','sys_show_hide','0','admin','2022-05-14 14:04:20','',NULL,'菜单状态列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (3,'系统开关','sys_normal_disable','0','admin','2022-05-14 14:04:20','',NULL,'系统开关列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (4,'任务状态','sys_job_status','0','admin','2022-05-14 14:04:20','',NULL,'任务状态列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (5,'任务分组','sys_job_group','0','admin','2022-05-14 14:04:20','',NULL,'任务分组列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (6,'系统是否','sys_yes_no','0','admin','2022-05-14 14:04:20','',NULL,'系统是否列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (7,'通知类型','sys_notice_type','0','admin','2022-05-14 14:04:20','',NULL,'通知类型列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (8,'通知状态','sys_notice_status','0','admin','2022-05-14 14:04:20','',NULL,'通知状态列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (9,'操作类型','sys_oper_type','0','admin','2022-05-14 14:04:20','',NULL,'操作类型列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (10,'系统状态','sys_common_status','0','admin','2022-05-14 14:04:20','',NULL,'登录状态列表');
-INSERT INTO `SYS_DICT_TYPE` VALUES (11,'登录日志类型','sys_login_type','0','admin','2022-06-10 00:28:26','admin','2022-06-10 00:28:26',NULL);
+INSERT INTO `SYS_DICT_TYPE` VALUES (1,'用户性别','sys_user_sex','0','admin','2022-05-14 14:04:20','',NULL,'用户性别列表'),(2,'菜单状态','sys_show_hide','0','admin','2022-05-14 14:04:20','',NULL,'菜单状态列表'),(3,'系统开关','sys_normal_disable','0','admin','2022-05-14 14:04:20','',NULL,'系统开关列表'),(4,'任务状态','sys_job_status','0','admin','2022-05-14 14:04:20','',NULL,'任务状态列表'),(5,'任务分组','sys_job_group','0','admin','2022-05-14 14:04:20','',NULL,'任务分组列表'),(6,'系统是否','sys_yes_no','0','admin','2022-05-14 14:04:20','',NULL,'系统是否列表'),(7,'通知类型','sys_notice_type','0','admin','2022-05-14 14:04:20','',NULL,'通知类型列表'),(8,'通知状态','sys_notice_status','0','admin','2022-05-14 14:04:20','',NULL,'通知状态列表'),(9,'操作类型','sys_oper_type','0','admin','2022-05-14 14:04:20','',NULL,'操作类型列表'),(10,'系统状态','sys_common_status','0','admin','2022-05-14 14:04:20','',NULL,'登录状态列表'),(11,'登录日志类型','sys_login_type','0','admin','2022-06-10 00:28:26','admin','2022-06-10 00:28:26',NULL);
 /*!40000 ALTER TABLE `SYS_DICT_TYPE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -610,8 +428,7 @@ CREATE TABLE `SYUSER` (
 
 LOCK TABLES `SYUSER` WRITE;
 /*!40000 ALTER TABLE `SYUSER` DISABLE KEYS */;
-INSERT INTO `SYUSER` VALUES ('0',30,'2015-08-25 10:34:54','admin','admin','/system/user/profile/avatar/6ba7f4b1-7935-43d2-baab-64bded5f0106.jpg','e10adc3949ba59abbe56e057f20f883e','1','2022-06-08 11:04:52',NULL,'test@test.com','18988888888','0');
-INSERT INTO `SYUSER` VALUES ('0f21b40c-5323-46e5-9200-0364eab3481e',NULL,'2022-05-29 09:28:57','test','test',NULL,'e10adc3949ba59abbe56e057f20f883e','0','2022-06-10 09:19:56','2022-05-29 09:28:57','test@test.com','18988888888','0');
+INSERT INTO `SYUSER` VALUES ('0',30,'2015-08-25 10:34:54','admin','admin','/system/user/profile/avatar/6ba7f4b1-7935-43d2-baab-64bded5f0106.jpg','e10adc3949ba59abbe56e057f20f883e','1','2022-06-08 11:04:52',NULL,'test@test.com','18988888888','0'),('0f21b40c-5323-46e5-9200-0364eab3481e',NULL,'2022-05-29 09:28:57','test','test',NULL,'e10adc3949ba59abbe56e057f20f883e','0','2022-06-10 09:19:56','2022-05-29 09:28:57','test@test.com','18988888888','0');
 /*!40000 ALTER TABLE `SYUSER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -639,8 +456,7 @@ CREATE TABLE `SYUSER_SYORGANIZATION` (
 
 LOCK TABLES `SYUSER_SYORGANIZATION` WRITE;
 /*!40000 ALTER TABLE `SYUSER_SYORGANIZATION` DISABLE KEYS */;
-INSERT INTO `SYUSER_SYORGANIZATION` VALUES ('0','0');
-INSERT INTO `SYUSER_SYORGANIZATION` VALUES ('0f21b40c-5323-46e5-9200-0364eab3481e','5477d9a9-e41e-485f-bb08-697e8facef88');
+INSERT INTO `SYUSER_SYORGANIZATION` VALUES ('0','0'),('0f21b40c-5323-46e5-9200-0364eab3481e','5477d9a9-e41e-485f-bb08-697e8facef88');
 /*!40000 ALTER TABLE `SYUSER_SYORGANIZATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -668,9 +484,7 @@ CREATE TABLE `SYUSER_SYROLE` (
 
 LOCK TABLES `SYUSER_SYROLE` WRITE;
 /*!40000 ALTER TABLE `SYUSER_SYROLE` DISABLE KEYS */;
-INSERT INTO `SYUSER_SYROLE` VALUES ('0','0');
-INSERT INTO `SYUSER_SYROLE` VALUES ('0','19f00d46-8f1b-45b5-b7b7-6197d7b8cb33');
-INSERT INTO `SYUSER_SYROLE` VALUES ('0','f4e1b151-a171-4705-9154-503a046cb72a');
+INSERT INTO `SYUSER_SYROLE` VALUES ('0','0'),('0','19f00d46-8f1b-45b5-b7b7-6197d7b8cb33'),('0','f4e1b151-a171-4705-9154-503a046cb72a');
 /*!40000 ALTER TABLE `SYUSER_SYROLE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -687,4 +501,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-08 22:13:06
+-- Dump completed on 2025-04-09 10:31:22

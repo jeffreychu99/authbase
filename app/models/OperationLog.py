@@ -9,6 +9,10 @@ class OperationLog(db.Model):
     PATH = db.Column(db.String(200))
     PARAMS = db.Column(db.Text)
     OPERATOR = db.Column(db.String(50))
+    OPERATIONTIME = db.Column(db.Integer)
+    RESPONSE = db.Column(db.Text)
+    EXECEPTION = db.Column(db.Text)
+    RESULT = db.Column(db.Integer)
     CREATEDATETIME = db.Column(db.DateTime, index=True, default=datetime.now)
 
     def __repr__(self):
@@ -22,5 +26,9 @@ class OperationLog(db.Model):
             'path': self.PATH,
             'params': self.PARAMS,
             'operator': self.OPERATOR,
+            'operationTime': self.OPERATIONTIME,
+            'response': self.RESPONSE,
+            'exception': self.EXECEPTION,
+            'result': self.RESULT,
             'createDateTime': self.CREATEDATETIME.strftime('%Y-%m-%d %H:%M:%S')
         }   

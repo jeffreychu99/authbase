@@ -67,6 +67,17 @@
       <el-table-column label="日志编号" align="center" prop="id" />
       <el-table-column label="操作内容" align="center" prop="operationName" />
       <el-table-column label="请求方式" align="center" prop="method" />
+      <el-table-column label="消耗时间" align="center" prop="operationTime" sortable="custom" :sort-orders="['descending', 'ascending']">
+        <template slot-scope="scope">
+          <span>{{ scope.row.operationTime }} 毫秒</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作结果" align="center" prop="result"  sortable="custom" :sort-orders="['descending', 'ascending']" >
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.result == 1" type="success">成功</el-tag>
+          <el-tag v-else type="danger">失败</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="操作地址" align="center" prop="path" width="130" :show-overflow-tooltip="true" />
       <el-table-column label="操作人员" align="center" prop="operator" width="100" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
       <el-table-column label="操作日期" align="center" prop="createDateTime" sortable="custom" :sort-orders="['descending', 'ascending']" width="180">
@@ -108,12 +119,22 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="请求方法：">{{ form.method }}</el-form-item>
+            <el-form-item label="操作时间：">{{ parseTime(form.createDateTime) }}</el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="请求参数：">{{ form.params }}</el-form-item>
           </el-col>
+          <el-col :span="24">
+            <el-form-item label="返回参数：">{{ form.response }}</el-form-item>
+          </el-col>
           <el-col :span="12">
-            <el-form-item label="操作时间：">{{ parseTime(form.createDateTime) }}</el-form-item>
+            <el-form-item label="操作结果：">{{ form.result == 1 ? '成功' : '失败' }}</el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="消耗时间：">{{ form.operationTime + '毫秒' }}</el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="异常信息：">{{ form.exception }}</el-form-item>
           </el-col>
         </el-row>
       </el-form>
