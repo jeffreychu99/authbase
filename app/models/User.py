@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     CREATEDATETIME = db.Column(db.DateTime, index=True, default=datetime.now)
     UPDATEDATETIME = db.Column(db.DateTime, index=True, default=datetime.now)
     LOGINNAME = db.Column(db.String(100), unique=True, index=True)
-    PWD = db.Column(db.String(100))
+    PWD = db.Column(db.String(256))
     NAME = db.Column(db.String(100))
     SEX = db.Column(db.String(1))
     AGE = db.Column(db.Integer)
@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
     EMAIL = db.Column(db.String(50))
     PHONENUMBER = db.Column(db.String(11))
     STATUS = db.Column(db.String(10))
+    SALT = db.Column(db.String(64))
 
     organizations = db.relationship('Organization',
                                     secondary=user_organization_table,

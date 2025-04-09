@@ -38,7 +38,7 @@ CREATE TABLE `SYONLINE` (
 
 LOCK TABLES `SYONLINE` WRITE;
 /*!40000 ALTER TABLE `SYONLINE` DISABLE KEYS */;
-INSERT INTO `SYONLINE` VALUES ('0c69d762-af59-4f12-bd36-ea7b8af99e78','2022-05-22 12:00:43','127.0.0.1','admin','1'),('3b395d9f-0102-4a25-93ce-c278d61e8b0f','2025-03-19 14:28:57','127.0.0.1','admin','0'),('48c530fa-0a73-4c1c-b0de-adec5c4a3447','2023-05-16 19:49:12','127.0.0.1','admin','1'),('575ddacd-03c5-43e5-8acc-fd9f8071e3bb','2025-03-19 14:29:27','127.0.0.1','test123','1'),('5bcd8f65-0123-4be3-ac27-6975e12d9015','2025-04-08 20:22:53','127.0.0.1','admin','1'),('8fcf487e-5735-461a-892d-6c184047c973','2025-04-08 21:12:25','127.0.0.1','admin','1'),('c2a39c82-a77a-49f1-bc46-3a65de80970d','2024-11-10 18:45:23','127.0.0.1','admin','1'),('d1a9efe8-93e5-4c14-b668-d81474f31e93','2025-04-08 21:11:20','127.0.0.1','admin','0'),('d883f49a-a2ed-4ab8-8157-92ec62089c6b','2024-07-03 09:38:22','127.0.0.1','admin','1');
+INSERT INTO `SYONLINE` VALUES ('0c69d762-af59-4f12-bd36-ea7b8af99e78','2022-05-22 12:00:43','127.0.0.1','admin','1'),('3a7aafe2-933c-4d93-8a1c-a323dba7426b','2025-04-09 21:55:54','127.0.0.1','admin','1'),('3b395d9f-0102-4a25-93ce-c278d61e8b0f','2025-03-19 14:28:57','127.0.0.1','admin','0'),('48c530fa-0a73-4c1c-b0de-adec5c4a3447','2023-05-16 19:49:12','127.0.0.1','admin','1'),('575ddacd-03c5-43e5-8acc-fd9f8071e3bb','2025-03-19 14:29:27','127.0.0.1','test123','1'),('5bcd8f65-0123-4be3-ac27-6975e12d9015','2025-04-08 20:22:53','127.0.0.1','admin','1'),('6f020347-d5ce-4924-8830-5c1a03dd7088','2025-04-09 21:56:23','127.0.0.1','admin','0'),('8fcf487e-5735-461a-892d-6c184047c973','2025-04-08 21:12:25','127.0.0.1','admin','1'),('c2a39c82-a77a-49f1-bc46-3a65de80970d','2024-11-10 18:45:23','127.0.0.1','admin','1'),('d1a9efe8-93e5-4c14-b668-d81474f31e93','2025-04-08 21:11:20','127.0.0.1','admin','0'),('d883f49a-a2ed-4ab8-8157-92ec62089c6b','2024-07-03 09:38:22','127.0.0.1','admin','1'),('ecd12c54-6331-40d4-aba4-d7e59a715c81','2025-04-09 21:56:29','127.0.0.1','admin','1'),('f86dae55-65a8-4c03-8426-a16086584a95','2025-04-09 21:55:52','127.0.0.1','admin','0');
 /*!40000 ALTER TABLE `SYONLINE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `SYOPERATIONLOG` (
   `EXECEPTION` text,
   `RESULT` int DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `SYOPERATIONLOG` (
 
 LOCK TABLES `SYOPERATIONLOG` WRITE;
 /*!40000 ALTER TABLE `SYOPERATIONLOG` DISABLE KEYS */;
-INSERT INTO `SYOPERATIONLOG` VALUES (24,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:03:57','admin',0,'<Response 46 bytes [200 OK]>',NULL,1),(25,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:12:29','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(26,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:14:44','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(27,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:22:55','admin',1301,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(28,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:26:18','admin',1303,NULL,'测试异常',0);
+INSERT INTO `SYOPERATIONLOG` VALUES (24,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:03:57','admin',0,'<Response 46 bytes [200 OK]>',NULL,1),(25,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:12:29','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(26,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:14:44','admin',0,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(27,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:22:55','admin',1301,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(28,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 10:26:18','admin',1303,NULL,'测试异常',0),(29,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 21:56:09','admin',194,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(30,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 21:56:20','admin',193,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1),(31,'修改密码','PUT','/system/user/profile/updatePwd','{}','2025-04-09 21:56:44','admin',191,'{\'code\': 200, \'msg\': \'修改成功\'}',NULL,1);
 /*!40000 ALTER TABLE `SYOPERATIONLOG` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,13 +410,14 @@ CREATE TABLE `SYUSER` (
   `LOGINNAME` varchar(100) NOT NULL,
   `NAME` varchar(100) DEFAULT NULL,
   `PHOTO` varchar(200) DEFAULT NULL,
-  `PWD` varchar(100) DEFAULT NULL,
+  `PWD` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `SEX` varchar(1) DEFAULT NULL,
   `UPDATEDATETIME` datetime DEFAULT NULL,
   `EMPLOYDATE` datetime DEFAULT NULL,
   `EMAIL` varchar(50) DEFAULT '' COMMENT '用户邮箱',
   `PHONENUMBER` varchar(11) DEFAULT '' COMMENT '手机号码',
   `STATUS` varchar(10) DEFAULT '0',
+  `SALT` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE KEY `UK_eiov1gsncrds3rean3dmu822p` (`LOGINNAME`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -428,7 +429,7 @@ CREATE TABLE `SYUSER` (
 
 LOCK TABLES `SYUSER` WRITE;
 /*!40000 ALTER TABLE `SYUSER` DISABLE KEYS */;
-INSERT INTO `SYUSER` VALUES ('0',30,'2015-08-25 10:34:54','admin','admin','/system/user/profile/avatar/6ba7f4b1-7935-43d2-baab-64bded5f0106.jpg','e10adc3949ba59abbe56e057f20f883e','1','2022-06-08 11:04:52',NULL,'test@test.com','18988888888','0'),('0f21b40c-5323-46e5-9200-0364eab3481e',NULL,'2022-05-29 09:28:57','test','test',NULL,'e10adc3949ba59abbe56e057f20f883e','0','2022-06-10 09:19:56','2022-05-29 09:28:57','test@test.com','18988888888','0');
+INSERT INTO `SYUSER` VALUES ('0',30,'2015-08-25 10:34:54','admin','admin','/system/user/profile/avatar/6ba7f4b1-7935-43d2-baab-64bded5f0106.jpg','88c9c102c82ffa18b9228c373e6188fde306a16c1ba59a42322cc7fc6c95c5afd2f26691852003ea6f3ae4eab7b6baaeebdc12a3f35ea07ef49e10493a374137','1','2022-06-08 11:04:52',NULL,'test@test.com','18988888888','0','897149ec9766a98b1b0ae95872080c11'),('0f21b40c-5323-46e5-9200-0364eab3481e',NULL,'2022-05-29 09:28:57','test','test',NULL,'cd4d76879f11122f3034fb24869259fd15963fce3854c2e8355981159856bc30c8e18be9c952b27f1ef728fa8310f6fdfef9a0f1481992a8a5b816e9d59f13ce','0','2022-06-10 09:19:56','2022-05-29 09:28:57','test@test.com','18988888888','0','d53132588025dd85a4a5cc606ff6c711');
 /*!40000 ALTER TABLE `SYUSER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-09 10:31:22
+-- Dump completed on 2025-04-09 21:57:15

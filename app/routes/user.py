@@ -15,6 +15,7 @@ from sqlalchemy import text
 import flask_excel as excel
 from .. import permission
 from ..operationlog import log_operation
+import os
 
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
@@ -57,11 +58,10 @@ def do_login():
     user = User.query.filter_by(LOGINNAME=request.json['username']).first()
     
     if user is not None:
-        md = hashlib.md5()
-        #提交的密码MD5加密
-        md.update(request.json['password'].encode('utf-8'))
+        salt = bytes.fromhex(user.SALT)
+        hash = hash_password(request.json['password'], salt).hex()
         #MD5加密后的内容同数据库密码比较
-        if md.hexdigest() == user.PWD:
+        if hash == user.PWD:
             login_user(user)
             record_login_history(1)
             return jsonify({'msg': '登录成功~', 'code': 200, 'url': '/', 'token': str(uuid.uuid4())})
@@ -164,6 +164,14 @@ def syuser_update():
 
     return jsonify({'code': 200, 'msg': '更新成功！'})
 
+def generate_salt(length=16):
+    """生成随机盐"""
+    return os.urandom(length)
+
+def hash_password(password, salt):
+    """使用PBKDF2算法加密密码"""
+    return hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'), salt, 100000)
+
 @base.route('/system/user', methods=['POST'])
 @login_required
 @permission('system:user:add')
@@ -174,10 +182,9 @@ def syuser_save():
     user = User()
 
     user.ID = str(uuid.uuid4())
-
-    md = hashlib.md5()
-    md.update(request.json['password'].encode('utf-8'))
-    user.PWD = md.hexdigest()
+    salt = generate_salt()
+    user.SALT = salt.hex()
+    user.PWD = hash_password(request.json['password'], salt).hex()
 
     with db.session.no_autoflush:
         if 'nickName' in request.json: user.NAME = request.json['nickName'] 
@@ -214,16 +221,12 @@ def syuser_update_pwd():
     user = User.query.get(current_user.ID)
 
     if user:
-        md = hashlib.md5()
-        #提交的密码MD5加密
-        md.update(request.args.get('oldPassword').encode('utf-8'))
-        #MD5加密后的内容同数据库密码比较
-        if md.hexdigest() != user.PWD:
+        salt = bytes.fromhex(user.SALT)
+        hash = hash_password(request.args.get('oldPassword'), salt).hex()
+        if hash != user.PWD:
             return jsonify({'code': 400, 'msg': '旧密码错误'})
 
-        md = hashlib.md5()
-        md.update(request.args.get('newPassword').encode('utf-8'))
-        user.PWD = md.hexdigest()
+        user.PWD = hash_password(request.args.get('newPassword'), salt).hex()
         db.session.add(user)
     return jsonify({'code': 200, 'msg': '修改成功'})
 
