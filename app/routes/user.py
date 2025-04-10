@@ -58,6 +58,8 @@ def do_login():
     user = User.query.filter_by(LOGINNAME=request.json['username']).first()
     
     if user is not None:
+        if user.STATUS != '0':
+            return jsonify({'msg': '登录失败,账号未激活~请联系管理员', 'code': 400})
         salt = bytes.fromhex(user.SALT)
         hash = hash_password(request.json['password'], salt).hex()
         #MD5加密后的内容同数据库密码比较
