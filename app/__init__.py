@@ -13,6 +13,14 @@ from flask import jsonify
 from functools import wraps
 import logging
 from logging.handlers import RotatingFileHandler
+from flask_simple_captcha import CAPTCHA
+
+CAPTCHA_CONFIG = {
+    'SECRET_CAPTCHA_KEY': '5984d2c2-2721-4f51-85bf-dfcc7aedd03',
+    'CAPTCHA_LENGTH': 4,
+    'CAPTCHA_DIGITS': True,
+    'EXPIRE_SECONDS': 600,
+}
 
 def setup_logger(name):
     logger = logging.getLogger(name)
@@ -84,7 +92,7 @@ loginmanager.session_protection = 'strong'
 
 moment = Moment()
 db = SQLAlchemy()
-
+captcha = CAPTCHA(config=CAPTCHA_CONFIG)
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -96,6 +104,7 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
     loginmanager.init_app(app)
+    captcha.init_app(app)
 
     from .base import base as base_blueprint
     app.register_blueprint(base_blueprint)

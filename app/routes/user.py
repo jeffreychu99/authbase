@@ -16,6 +16,7 @@ import flask_excel as excel
 from .. import permission
 from ..operationlog import log_operation
 import os
+from .. import captcha
 
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
@@ -54,6 +55,9 @@ def do_logout():
 
 @base.route('/login', methods=['POST'])
 def do_login():
+    if not captcha.verify(request.json['code'], request.json['uuid']):
+        return jsonify({'msg': '验证码错误~', 'code': 400})
+
     #检查用户名是否存在
     user = User.query.filter_by(LOGINNAME=request.json['username']).first()
     
