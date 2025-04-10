@@ -9,3 +9,4 @@ pyexcel-xlsx==0.6.0
 Werkzeug==2.3.0
 watchdog==6.0.0
 flask-simple-captcha==5.5.5
+psutil==5.9.0
