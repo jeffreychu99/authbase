@@ -84,25 +84,31 @@
 
 后端启动：
 
-1. mysql创建名为authbase的数据库(因为机构查询用到了CTE，所以MYSQL需要8.0以上版本)
-2. 导入根目录下db.sql数据库脚本到authbase数据库中
-3. pip3 install -r requirements.txt
-4. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码。
-5. python3.x -m flask --app start run [-h 0.0.0.0] [-p 8080]
-   
+1. mysql创建名为authbase的数据库(因为机构查询用到了CTE，所以MYSQL需要8.0以上版本)；
+2. 导入根目录下db.sql数据库脚本到authbase数据库中；
+3. pip3 install -r requirements.txt；
+4. 更改config.py DevelopmentConfig类下的数据库连接，提供用户名密码；
+5. 启动后端。最简单的方式：python start.py
+
+   当然也可以这样：
+
+   python3 -m flask --app start run [-h 0.0.0.0] [-p 8080]
+
    说明一下：[]里面是可选项的，如果加上，请去掉中括号：
 
-   python3.x -m flask --app start run
+   python3 -m flask --app start run
 
    或
-   
-   python3.x -m flask --app start run -h 0.0.0.0 -p 8080
- 
+
+   python3 -m flask --app start run -h 0.0.0.0 -p 8080
+
 **讨论群**
 
 欢迎加入python技术爱好者，群号码：297690915
 
 **效果图**
+
+![登陆](doc/登陆.png)
 
 ![首页](doc/首页.png)
 
