@@ -42,7 +42,10 @@ def log_operation(operation_name):
                 log_entry.OPERATIONTIME = int(execution_time * 1000)  # Convert to milliseconds
                 json_msg = result.get_json(silent=True) or {}
                 logger.debug(f"Execute successful: {json_msg} | Execution time: {execution_time:.2f} ms")
-                log_entry.RESULT = 1
+                if 'code' in json_msg:
+                    log_entry.RESULT = json_msg['code'] == 200
+                else:
+                    log_entry.RESULT = 1
                 log_entry.RESPONSE = str(json_msg)
 
                 return result
