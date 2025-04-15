@@ -25,9 +25,8 @@ class Resource(db.Model, UserMixin):
 
     SYRESOURCE_ID = db.Column(db.String, db.ForeignKey('SYRESOURCE.ID'))
 
-    parent = db.relationship('Resource', remote_side=[ID], backref='resource', uselist=False)
-
-    children = db.relationship('Resource')
+    children = db.relationship('Resource', backref=db.backref('parent', remote_side=[ID]), 
+                               lazy='dynamic', order_by="Resource.SEQ")
 
     STATUS = db.Column(db.String(10))
 
