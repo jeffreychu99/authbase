@@ -3,3 +3,4 @@
 *.pyc
 app.log
 .DS_Store
+uploads/

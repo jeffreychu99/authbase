@@ -364,4 +364,7 @@ def get_upload_path():
     parent = os.path.dirname(parent)
     parent = os.path.dirname(parent)
 
-    return os.path.join(parent, "uploads")
+    path = os.path.join(parent, "uploads")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
