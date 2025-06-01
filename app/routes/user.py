@@ -17,6 +17,8 @@ from .. import permission
 from ..operationlog import log_operation
 import os
 from .. import captcha
+from flask import send_from_directory
+from werkzeug.utils import secure_filename
 
 @base.route('/system/user/authRole', methods=['PUT'])
 @login_required
@@ -331,3 +333,35 @@ def syuser_status_update():
 
     return jsonify({'code': 200, 'msg': '操作成功'})
 
+@base.route('/system/user/profile/avatar', methods=['POST'])
+def syuser_avatar_update():
+    file = request.files['avatarfile']
+    filename = str(uuid.uuid4()) + ".jpg"
+    file.save(os.path.join(get_upload_path(), filename))
+
+    current_user.PHOTO = '/system/user/profile/avatar/' + filename
+    db.session.add(current_user)
+    db.session.commit()
+
+    return jsonify({'msg': '操作成功', 'code': 200, 'imgUrl':  current_user.PHOTO})
+
+@base.route('/system/user/profile/avatar/<filename>', methods=['GET'])
+def sysuser_avatar_preview(filename):
+    try:
+        filename = secure_filename(filename)
+        response = send_from_directory(get_upload_path(), filename, as_attachment=False)
+            # 根据文件扩展名设置 MIME 类型
+        if filename.endswith('.jpg') or filename.endswith('.jpeg'):
+            response.headers['Content-Type'] = 'image/jpeg'
+        elif filename.endswith('.png'):
+            response.headers['Content-Type'] = 'image/png'
+        return response
+    except FileNotFoundError: 
+        return jsonify({'msg': '文件不存在', 'code': 404})   
+
+def get_upload_path():
+    parent = os.path.dirname(os.path.abspath(__file__))
+    parent = os.path.dirname(parent)
+    parent = os.path.dirname(parent)
+
+    return os.path.join(parent, "uploads")
