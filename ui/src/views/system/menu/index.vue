@@ -354,7 +354,7 @@ export default {
     getTreeselect() {
       listMenu().then(response => {
         this.menuOptions = [];
-        const menu = { menuId: 0, menuName: '主类目', children: [] };
+        const menu = { menuId: '', menuName: '主类目', children: [] };
         menu.children = this.handleTree(response.data, "menuId");
         this.menuOptions.push(menu);
       });
@@ -396,7 +396,7 @@ export default {
       if (row != null && row.menuId) {
         this.form.parentId = row.menuId;
       } else {
-        this.form.parentId = 0;
+        this.form.parentId = '';
       }
       this.open = true;
       this.title = "添加菜单";
